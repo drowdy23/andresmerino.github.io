@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Private Portfolio — Andrés Merino</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500&family=EB+Garamond:ital,wght@0,400;1,400&display=swap" rel="stylesheet">
+    
+/* ── UNIVERSAL HEADER V10 (FORCE OVERRIDE) ── */
+#universal-nav {
+    position: fixed !important;
+    top: 0 !important; left: 0 !important; right: 0 !important;
+    height: 70px !important;
+    background: rgba(3,3,3,0.95) !important;
+    backdrop-filter: blur(20px) !important;
+    display: flex !important;
+    flex-direction: row !important;
+    justify-content: space-between !important;
+    align-items: center !important;
+    padding: 0 1.5rem !important;
+    z-index: 9999999 !important;
+    border-bottom: 1px solid rgba(255,255,255,0.1) !important;
+}
+
+#universal-nav .nav-back, 
+#universal-nav .nav-logo, 
+#universal-nav .menu-toggle {
+    pointer-events: auto !important;
+    display: flex !important;
+    align-items: center !important;
+    font-family: 'Space Mono', monospace !important;
+    text-transform: uppercase !important;
+    text-decoration: none !important;
+}
+
+#universal-nav .nav-back { font-size: 10px !important; color: #fff !important; flex: 1 !important; justify-content: flex-start !important; }
+#universal-nav .nav-logo { font-size: 12px !important; font-weight: 700 !important; color: #fff !important; flex: 1 !important; justify-content: center !important; }
+#universal-nav .menu-toggle { 
+    flex: 1 !important; justify-content: flex-end !important;
+    background: none !important; border: none !important; padding: 10px !important; 
+}
+#universal-nav .menu-toggle span { display: block !important; width: 22px !important; height: 1.5px !important; background: #fff !important; }
+
+.mobile-nav-overlay {
+    position: fixed !important; inset: 0 !important;
+    background: rgba(3,3,3,0.98) !important;
+    z-index: 9999998 !important;
+    display: flex !important; flex-direction: column !important; justify-content: center !important; align-items: center !important; gap: 30px !important;
+    opacity: 0 !important; visibility: hidden !important;
+    transition: all 0.4s ease !important;
+}
+.mobile-nav-overlay.active { opacity: 1 !important; visibility: visible !important; }
+.mobile-nav-overlay a { color: #888 !important; text-decoration: none !important; font-family: 'Space Mono', monospace !important; }
+
+@media (min-width: 1025px) {
+    #universal-nav { padding: 0 4rem !important; height: 90px !important; background: none !important; border: none !important; backdrop-filter: none !important; }
+    #universal-nav .menu-toggle { display: none !important; }
+    #universal-nav .nav-logo { color: #555 !important; }
+    #universal-nav .nav-back { color: #555 !important; }
+}
+
+</style>
+</head>
+<body>
+
+<nav id="universal-nav">
+    <a href="index.html" class="nav-back">← BACK</a>
+    <div class="nav-logo">AM</div>
+    <button class="menu-toggle" id="menu-toggle" aria-label="Menu"><span></span><span></span></button>
+</nav>
+<div class="mobile-nav-overlay" id="mobile-nav">
+    <a href="index.html">HOME</a>
+    <a href="project-personal.html">PERSONAL WORK</a>
+    <a href="project-kayara.html">KAYARA</a>
+    <a href="project-tales.html">TALES FROM SUBURBIA</a>
+    <a href="project-avatar.html">AVATAR</a>
+    <a href="project-dads-house.html">DAD'S HOUSE</a>
+    <a href="nda-login.html">PRIVATE VAULT</a>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="login-container">
+    <h1 class="title">Private Work</h1>
+    <p class="subtitle">This section contains password-protected studio productions and feature film development.</p>
+
+    <!-- Claro y profesional: tú no rompes NDA's -->
+    <div class="disclaimer">
+        <strong>Authorized Access Only</strong>
+        I have explicit permission to display these images for professional review purposes. All artwork, characters, and intellectual property remain the exclusive property of their respective studios and owners.
+    </div>
+
+    <form id="pass-form">
+        <div class="input-wrapper">
+            <input type="password" id="pass-input" placeholder="ENTER PASSWORD" autocomplete="off" autofocus>
+            <div id="error-msg" class="error-msg">Incorrect Password</div>
+        </div>
+        <button type="submit" class="btn-submit">View Portfolio</button>
+    </form>
+</div>
+
+<script>
+    document.getElementById('pass-form').addEventListener('submit', function(e) {
+        e.preventDefault();
+        const pass = document.getElementById('pass-input').value;
+        const errorMsg = document.getElementById('error-msg');
+        
+        // Placeholder password: Cestvanefy344
+        if (pass === 'Cestvanefy344') {
+            document.querySelector('.login-container').style.opacity = '0';
+            document.querySelector('.login-container').style.transform = 'translateY(-20px)';
+            
+            setTimeout(() => {
+                window.location.href = 'nda-portfolio.html';
+            }, 600);
+        } else {
+            errorMsg.classList.add('visible');
+            document.getElementById('pass-input').value = '';
+            
+            setTimeout(() => {
+                errorMsg.classList.remove('visible');
+            }, 300);
+        }
+    });
+
+    document.getElementById('pass-input').addEventListener('input', () => {
+        document.getElementById('error-msg').classList.remove('visible');
+    });
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<script>
+(function(){
+    const t = document.getElementById('menu-toggle');
+    const o = document.getElementById('mobile-nav');
+    if(t && o) {
+        t.onclick = function(e) {
+            e.preventDefault();
+            o.classList.toggle('active');
+        };
+    }
+})();</script>
+</body>
+</html>

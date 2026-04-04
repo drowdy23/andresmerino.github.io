@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tales From Outer Suburbia — Andrés Merino</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;700&family=EB+Garamond:ital,wght@0,400;1,400&display=swap" rel="stylesheet">
+    
+/* ── UNIVERSAL HEADER V10 (FORCE OVERRIDE) ── */
+#universal-nav {
+    position: fixed !important;
+    top: 0 !important; left: 0 !important; right: 0 !important;
+    height: 70px !important;
+    background: rgba(3,3,3,0.95) !important;
+    backdrop-filter: blur(20px) !important;
+    display: flex !important;
+    flex-direction: row !important;
+    justify-content: space-between !important;
+    align-items: center !important;
+    padding: 0 1.5rem !important;
+    z-index: 9999999 !important;
+    border-bottom: 1px solid rgba(255,255,255,0.1) !important;
+}
+
+#universal-nav .nav-back, 
+#universal-nav .nav-logo, 
+#universal-nav .menu-toggle {
+    pointer-events: auto !important;
+    display: flex !important;
+    align-items: center !important;
+    font-family: 'Space Mono', monospace !important;
+    text-transform: uppercase !important;
+    text-decoration: none !important;
+}
+
+#universal-nav .nav-back { font-size: 10px !important; color: #fff !important; flex: 1 !important; justify-content: flex-start !important; }
+#universal-nav .nav-logo { font-size: 12px !important; font-weight: 700 !important; color: #fff !important; flex: 1 !important; justify-content: center !important; }
+#universal-nav .menu-toggle { 
+    flex: 1 !important; justify-content: flex-end !important;
+    background: none !important; border: none !important; padding: 10px !important; 
+}
+#universal-nav .menu-toggle span { display: block !important; width: 22px !important; height: 1.5px !important; background: #fff !important; }
+
+.mobile-nav-overlay {
+    position: fixed !important; inset: 0 !important;
+    background: rgba(3,3,3,0.98) !important;
+    z-index: 9999998 !important;
+    display: flex !important; flex-direction: column !important; justify-content: center !important; align-items: center !important; gap: 30px !important;
+    opacity: 0 !important; visibility: hidden !important;
+    transition: all 0.4s ease !important;
+}
+.mobile-nav-overlay.active { opacity: 1 !important; visibility: visible !important; }
+.mobile-nav-overlay a { color: #888 !important; text-decoration: none !important; font-family: 'Space Mono', monospace !important; }
+
+@media (min-width: 1025px) {
+    #universal-nav { padding: 0 4rem !important; height: 90px !important; background: none !important; border: none !important; backdrop-filter: none !important; }
+    #universal-nav .menu-toggle { display: none !important; }
+    #universal-nav .nav-logo { color: #555 !important; }
+    #universal-nav .nav-back { color: #555 !important; }
+}
+
+</style>
+</head>
+<body>
+
+<nav id="universal-nav">
+    <a href="index.html" class="nav-back">← BACK</a>
+    <div class="nav-logo">AM</div>
+    <button class="menu-toggle" id="menu-toggle" aria-label="Menu"><span></span><span></span></button>
+</nav>
+<div class="mobile-nav-overlay" id="mobile-nav">
+    <a href="index.html">HOME</a>
+    <a href="project-personal.html">PERSONAL WORK</a>
+    <a href="project-kayara.html">KAYARA</a>
+    <a href="project-tales.html">TALES FROM SUBURBIA</a>
+    <a href="project-avatar.html">AVATAR</a>
+    <a href="project-dads-house.html">DAD'S HOUSE</a>
+    <a href="nda-login.html">PRIVATE VAULT</a>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- Hero -->
+<div class="hero" data-lb style="cursor:pointer;">
+    <img src="assets/img/projects/Tales From Outer suburbia/grandparentsForestA0003_bg_pnt_v004+copy.webp" alt="Tales From Outer Suburbia">
+    <div class="hero-title-wrap">
+        <h1 class="hero-title">Tales From<br>Outer Suburbia</h1>
+    </div>
+</div>
+
+<div class="project-info-bar">
+    <div class="info-cell"><p class="info-value">Background Painting</p></div>
+    <div class="info-cell"><p class="info-value">Environment Design</p></div>
+    <div class="info-cell"><p class="info-value">Visual Development</p></div>
+</div>
+
+<div class="content">
+    <div class="section-label"><span>Environments</span></div>
+    <div class="block-full"><div data-lb><img src="assets/img/projects/Tales From Outer suburbia/grandparentsForestA0004_bg_pnt_v004+copy.webp" alt="Forest"></div></div>
+    <p class="caption">Master</p>
+
+    <div class="section-label"><span>Atmosphere Studies</span></div>
+    <div class="block-full"><div data-lb><img src="assets/img/projects/Tales From Outer suburbia/sunset+golden+skydome+tests.webp" alt="Sunset"></div></div>
+    <p class="caption">Master</p>
+
+    <div class="block-main-aside" style="margin-top: 3px;">
+        <div data-lb><img src="assets/img/projects/Tales From Outer suburbia/Storms+test.webp" alt="Storm"></div>
+        <div data-lb style="margin-top: 5rem;"><img src="assets/img/projects/Tales From Outer suburbia/storms3.webp" alt="Panels"></div>
+    </div>
+    <p class="caption">Master &middot; Detail</p>
+
+    <div class="project-nav">
+        <a href="index.html">&#8592; &nbsp; Back to All Work</a>
+        <a href="project-kayara.html">Kayara &nbsp; &#8594;</a>
+    </div>
+</div>
+
+<!-- Contact Beacon -->
+<div class="side-contact" id="side-contact">
+    <a href="mailto:andresgonzalezmerino@gmail.com" class="side-btn">
+        <div class="mail-circle">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
+        </div>
+        <span>Get in Touch</span>
+    </a>
+</div>
+
+<footer>
+    <span>&copy; 2026 Andrés Merino</span>
+    <span>All Rights Reserved</span>
+</footer>
+
+<!-- Lightbox -->
+<div class="lightbox" id="lightbox">
+    <div class="lb-backdrop" id="lb-backdrop"></div>
+    <button class="lb-arrow prev" id="lb-prev">&#8592;</button>
+    <div class="lb-img-wrap">
+        <button class="lb-close" id="lb-close">CLOSE &#215;</button>
+        <img id="lb-img" src="" alt="">
+        <div class="lb-counter" id="lb-counter"></div>
+    </div>
+    <button class="lb-arrow next" id="lb-next">&#8594;</button>
+</div>
+
+<script>
+    const nav = document.getElementById('main-nav');
+    const sideContact = document.getElementById('side-contact');
+
+    window.addEventListener('scroll', () => {
+        nav.classList.toggle('scrolled', window.scrollY > 10);
+        // Aparece tras solo 150px de scroll
+        if (window.scrollY > 150) {
+            sideContact.classList.add('visible');
+        } else {
+            sideContact.classList.remove('visible');
+        }
+    });
+
+    const lightbox  = document.getElementById('lightbox');
+    const lbImg     = document.getElementById('lb-img');
+    const lbCounter = document.getElementById('lb-counter');
+    const triggers = Array.from(document.querySelectorAll('[data-lb]'));
+    const imgList  = triggers.map(el => {
+        const img = el.querySelector('img') || el;
+        return { src: img.src, alt: img.alt };
+    });
+
+    let current = 0;
+    function openLightbox(i) {
+        current = i;
+        lbImg.src = imgList[i].src;
+        lbImg.style.opacity = '1';
+        lbCounter.textContent = (i + 1) + ' / ' + imgList.length;
+        lightbox.classList.add('active');
+        document.body.style.overflow = 'hidden';
+    }
+    function closeLightbox() {
+        lightbox.classList.remove('active');
+        document.body.style.overflow = '';
+    }
+    function go(dir) {
+        current = (current + dir + imgList.length) % imgList.length;
+        lbImg.style.opacity = '0';
+        setTimeout(() => {
+            lbImg.src = imgList[current].src;
+            lbCounter.textContent = (current + 1) + ' / ' + imgList.length;
+            lbImg.style.opacity = '1';
+        }, 200);
+    }
+
+    triggers.forEach((el, i) => el.addEventListener('click', () => openLightbox(i)));
+    document.getElementById('lb-close').addEventListener('click', closeLightbox);
+    document.getElementById('lb-backdrop').addEventListener('click', closeLightbox);
+    document.getElementById('lb-prev').addEventListener('click', e => { e.stopPropagation(); go(-1); });
+    document.getElementById('lb-next').addEventListener('click', e => { e.stopPropagation(); go(1); });
+
+    document.addEventListener('keydown', e => {
+        if (!lightbox.classList.contains('active')) return;
+        if (e.key === 'Escape') closeLightbox();
+        if (e.key === 'ArrowLeft') go(-1);
+        if (e.key === 'ArrowRight') go(1);
+    });
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<script>
+(function(){
+    const t = document.getElementById('menu-toggle');
+    const o = document.getElementById('mobile-nav');
+    if(t && o) {
+        t.onclick = function(e) {
+            e.preventDefault();
+            o.classList.toggle('active');
+        };
+    }
+})();</script>
+</body>
+</html>
