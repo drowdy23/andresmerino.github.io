@@ -6,484 +6,100 @@
     <title>Avatar: The Last Airbender — Private Archive</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;700&family=Space+Mono:wght@400;700&family=EB+Garamond:ital,wght@0,400;1,400&display=swap" rel="stylesheet">
-    
-/* ── UNIVERSAL HEADER V10 (FORCE OVERRIDE) ── */
-#universal-nav {
-    position: fixed !important;
-    top: 0 !important; left: 0 !important; right: 0 !important;
-    height: 70px !important;
-    background: rgba(3,3,3,0.95) !important;
-    backdrop-filter: blur(20px) !important;
-    display: flex !important;
-    flex-direction: row !important;
-    justify-content: space-between !important;
-    align-items: center !important;
-    padding: 0 1.5rem !important;
-    z-index: 9999999 !important;
-    border-bottom: 1px solid rgba(255,255,255,0.1) !important;
-}
+    <style>
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+        :root { --bg: #030303; --border: rgba(255,255,255,0.07); --text: #e0e0e0; --muted: #555; --gap: 2rem; }
+        body { background: var(--bg); color: var(--text); font-family: 'Inter', sans-serif; -webkit-font-smoothing: antialiased; overflow-x: hidden; background-image: linear-gradient(var(--border) 1px, transparent 1px), linear-gradient(90deg, var(--border) 1px, transparent 1px); background-size: 100px 100px; background-attachment: fixed; }
+        nav { padding: 1.75rem 3rem; display: flex; justify-content: space-between; align-items: center; position: sticky; top: 0; z-index: 500; background: rgba(3,3,3,0.92); backdrop-filter: blur(10px); border-bottom: 1px solid var(--border); }
+        .nav-back, .nav-logo { font-family: 'Space Mono', monospace; font-size: 0.5rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--muted); text-decoration: none; transition: color 0.3s; }
+        .nav-back:hover, .nav-logo:hover { color: #fff; }
+        .hero { width: 100%; height: 90vh; position: relative; overflow: hidden; cursor: pointer; border-bottom: 1px solid var(--border); }
+        .hero img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; animation: heroIn 2s cubic-bezier(0.16, 1, 0.3, 1) forwards; transition: transform 1.2s cubic-bezier(0.16, 1, 0.3, 1); }
+        .hero:hover img { transform: scale(1.015); }
+        @keyframes heroIn { from { transform: scale(1.03); opacity: 0; } to { transform: scale(1); opacity: 1; } }
+        .hero::after { content: ''; position: absolute; inset: 0; background: linear-gradient(to top, rgba(3,3,3,0.95) 0%, transparent 60%); pointer-events: none; }
+        .hero-text { position: absolute; bottom: 4rem; left: 4rem; z-index: 2; pointer-events: none; }
+        .hero-text h1 { font-family: 'EB Garamond', serif; font-size: clamp(4rem, 8vw, 8rem); font-weight: 400; line-height: 0.85; color: #fff; margin-bottom: 1rem; }
+        .gallery { padding: 6rem 4rem 12rem; display: flex; flex-direction: column; gap: 10rem; max-width: 1600px; margin: 0 auto; }
+        .tile-wrap { display: flex; flex-direction: column; width: 100%; position: relative; }
+        .tile { position: relative; background: #000; cursor: pointer; overflow: hidden; display: block; border: 1px solid rgba(255,255,255,0.05); box-shadow: 0 10px 40px rgba(0,0,0,0.5); width: 100%; }
+        .tile img, .tile video { width: 100%; height: auto; display: block; transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1); }
+        .tile:not(.vid):hover img { transform: scale(1.02); }
+        .tile.vid::after { content: '▶'; position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; font-size: 2.5rem; color: rgba(255,255,255,0); background: rgba(0,0,0,0); transition: all 0.3s ease; pointer-events: none; }
+        .tile.vid:hover::after { color: rgba(255,255,255,0.7); background: rgba(0,0,0,0.3); }
+        .caption-simple { font-family: 'Space Mono', monospace; font-size: 0.45rem; letter-spacing: 0.25em; text-transform: uppercase; color: var(--muted); margin-top: 1rem; text-align: right; }
+        .caption-highlight { font-family: 'Space Mono', monospace; font-size: 0.6rem; letter-spacing: 0.3em; text-transform: uppercase; color: #fff; margin-top: 1.5rem; text-align: center; border-bottom: 1px solid rgba(255,255,255,0.15); padding-bottom: 0.75rem; display: inline-block; }
+        .caption-accent { font-family: 'Space Mono', monospace; font-size: 0.45rem; letter-spacing: 0.25em; text-transform: uppercase; color: #fff; margin-top: 0.75rem; text-align: left; border-left: 2px solid #fff; padding-left: 0.75rem; }
+        .mod-full { width: 100%; }
+        .mod-split { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center; }
+        .mod-split-asym { display: grid; grid-template-columns: 6fr 4fr; gap: 4rem; align-items: center; }
+        .mod-stack { display: flex; flex-direction: column; gap: 3rem; align-items: center; }
+        .mod-inset-left { position: relative; width: 100%; background: #000; }
+        .mod-inset-left .bg-layer { width: 100%; }
+        .mod-inset-left .bg-layer video { width: 100%; object-fit: cover; opacity: 0.8; display: block; }
+        .mod-inset-left .front-layer { position: absolute; bottom: 2rem; left: 2rem; width: 25%; z-index: 2; border: 2px solid var(--bg); box-shadow: 0 20px 50px rgba(0,0,0,0.9); }
+        .mod-overlap-tr { position: relative; width: 100%; max-width: 1200px; margin: 0 auto; }
+        .mod-overlap-tr .main-layer { width: 100%; display: block; }
+        .mod-overlap-tr .top-right-layer { position: absolute; top: -2.5rem; right: -2.5rem; width: 28%; z-index: 2; border: 4px solid var(--bg); box-shadow: 0 20px 50px rgba(0,0,0,0.7); }
+        .mod-center-wings { display: grid; grid-template-columns: repeat(12, 1fr); align-items: center; }
+        .mod-center-wings .wing-left { grid-column: 1 / 5; grid-row: 1; z-index: 3; margin-bottom: -5rem; border: 4px solid var(--bg); box-shadow: 0 15px 40px rgba(0,0,0,0.6); }
+        .mod-center-wings .center-vid { grid-column: 3 / 11; grid-row: 1; z-index: 1; box-shadow: 0 25px 60px rgba(0,0,0,0.8); }
+        .mod-center-wings .wing-right { grid-column: 9 / 13; grid-row: 1; z-index: 2; margin-top: -5rem; border: 4px solid var(--bg); box-shadow: 0 15px 40px rgba(0,0,0,0.6); }
+        
+        .side-contact { position: fixed; right: 0; top: 50%; transform: translateY(-50%); z-index: 9999; opacity: 0; pointer-events: none; transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1); }
+        .side-contact.visible { opacity: 1; pointer-events: all; transform: translateY(-50%) translateX(-1rem); }
+        .side-btn { display: flex; flex-direction: column; align-items: center; justify-content: center; background: rgba(12, 12, 12, 0.8); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); color: #fff; padding: 1.5rem 1rem 2.2rem; text-decoration: none; border-radius: 100px; border: 1px solid rgba(255, 255, 255, 0.1); box-shadow: 0 15px 45px rgba(0,0,0,0.6); transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1); }
+        .mail-circle { width: 42px; height: 42px; background: #fff; color: #000; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin-bottom: 1.5rem; box-shadow: 0 0 20px rgba(255,255,255,0.3); transition: transform 0.4s ease, background 0.4s ease; }
+        .side-btn span { writing-mode: vertical-rl; transform: rotate(180deg); font-family: 'Inter', sans-serif; font-size: 0.65rem; font-weight: 500; letter-spacing: 0.35em; text-transform: uppercase; white-space: nowrap; opacity: 0.7; transition: opacity 0.4s ease; }
+        .side-btn:hover { background: #fff; color: #000; border-color: #fff; transform: translateY(-8px); }
+        .side-btn:hover .mail-circle { background: #000; color: #fff; transform: scale(1.1); }
+        .side-btn:hover span { opacity: 1; }
 
-#universal-nav .nav-back, 
-#universal-nav .nav-logo, 
-#universal-nav .menu-toggle {
-    pointer-events: auto !important;
-    display: flex !important;
-    align-items: center !important;
-    font-family: 'Space Mono', monospace !important;
-    text-transform: uppercase !important;
-    text-decoration: none !important;
-}
-
-#universal-nav .nav-back { font-size: 10px !important; color: #fff !important; flex: 1 !important; justify-content: flex-start !important; }
-#universal-nav .nav-logo { font-size: 12px !important; font-weight: 700 !important; color: #fff !important; flex: 1 !important; justify-content: center !important; }
-#universal-nav .menu-toggle { 
-    flex: 1 !important; justify-content: flex-end !important;
-    background: none !important; border: none !important; padding: 10px !important; 
-}
-#universal-nav .menu-toggle span { display: block !important; width: 22px !important; height: 1.5px !important; background: #fff !important; }
-
-.mobile-nav-overlay {
-    position: fixed !important; inset: 0 !important;
-    background: rgba(3,3,3,0.98) !important;
-    z-index: 9999998 !important;
-    display: flex !important; flex-direction: column !important; justify-content: center !important; align-items: center !important; gap: 30px !important;
-    opacity: 0 !important; visibility: hidden !important;
-    transition: all 0.4s ease !important;
-}
-.mobile-nav-overlay.active { opacity: 1 !important; visibility: visible !important; }
-.mobile-nav-overlay a { color: #888 !important; text-decoration: none !important; font-family: 'Space Mono', monospace !important; }
-
-@media (min-width: 1025px) {
-    #universal-nav { padding: 0 4rem !important; height: 90px !important; background: none !important; border: none !important; backdrop-filter: none !important; }
-    #universal-nav .menu-toggle { display: none !important; }
-    #universal-nav .nav-logo { color: #555 !important; }
-    #universal-nav .nav-back { color: #555 !important; }
-}
-
-</style>
+        .lb { position: fixed; inset: 0; z-index: 10000; display: flex; align-items: center; justify-content: center; visibility: hidden; pointer-events: none; }
+        .lb.on { visibility: visible; pointer-events: all; }
+        .lb-bg { position: absolute; inset: 0; background: rgba(3,3,3,0.98); opacity: 0; transition: opacity 0.5s ease; }
+        .lb.on .lb-bg { opacity: 1; }
+        .lb-content { position: relative; z-index: 2; opacity: 0; transform: scale(0.97) translateY(8px); transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1); max-width: 95vw; max-height: 90vh; display: flex; align-items: center; justify-content: center; }
+        .lb.on .lb-content { opacity: 1; transform: scale(1) translateY(0); }
+        .lb-content img, .lb-content video { max-width: 95vw; max-height: 88vh; object-fit: contain; display: block; }
+        .lb-meta { position: absolute; top: -2.5rem; left: 0; font-family: 'Space Mono', monospace; font-size: 0.45rem; color: #777; letter-spacing: 0.12em; text-transform: uppercase; }
+        .lb-nav { position: absolute; bottom: -3rem; left: 0; right: 0; display: flex; justify-content: center; gap: 4rem; font-family: 'Space Mono', monospace; font-size: 0.5rem; letter-spacing: 0.25em; color: #777; }
+        .lb-nav span { cursor: pointer; transition: color 0.3s; }
+        .lb-nav span:hover { color: #fff; }
+        @media (max-width: 1024px) { .side-contact { display: none; } }
+    </style>
 </head>
 <body>
-
-<nav id="universal-nav">
-    <a href="index.html" class="nav-back">← BACK</a>
-    <div class="nav-logo">AM</div>
-    <button class="menu-toggle" id="menu-toggle" aria-label="Menu"><span></span><span></span></button>
-</nav>
-<div class="mobile-nav-overlay" id="mobile-nav">
-    <a href="index.html">HOME</a>
-    <a href="project-personal.html">PERSONAL WORK</a>
-    <a href="project-kayara.html">KAYARA</a>
-    <a href="project-tales.html">TALES FROM SUBURBIA</a>
-    <a href="project-avatar.html">AVATAR</a>
-    <a href="project-dads-house.html">DAD'S HOUSE</a>
-    <a href="nda-login.html">PRIVATE VAULT</a>
-</div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<div class="hero tile" data-media="img" data-src="assets/img/projects/Avatar the last airbender/Screenshot 2025-05-23 170530.webp">
-    <img src="assets/img/projects/Avatar the last airbender/Screenshot 2025-05-23 170530.webp" alt="Hero">
-    <div class="hero-text"><h1>Avatar</h1><p>The Last Airbender &middot; Environment Design</p></div>
-</div>
-
+<nav><a href="nda-portfolio.html" class="nav-back">&#8592; Back to Vault</a><div class="nav-logo">Andrés Merino</div></nav>
+<div class="hero tile" data-media="img" data-src="assets/img/projects/Avatar the last airbender/Screenshot 2025-05-23 170530.webp"><img src="assets/img/projects/Avatar the last airbender/Screenshot 2025-05-23 170530.webp" alt="Hero"><div class="hero-text"><h1>Avatar</h1><p>The Last Airbender &middot; Environment Design</p></div></div>
 <div class="gallery">
-
-    <!-- SHOT 01 — Full master -->
-    <div class="mod-full">
-        <div class="tile-wrap">
-            <div class="tile" data-media="img" data-src="assets/img/projects/Avatar the last airbender/Screenshot 2025-05-23 173329.webp">
-                <img src="assets/img/projects/Avatar the last airbender/Screenshot 2025-05-23 173329.webp" alt="Blue Lake">
-            </div>
-            <div class="caption-simple">Master</div>
-        </div>
-    </div>
-
-    <!-- SHOT — Nueva carpeta (6): animated BG with detail inset -->
-    <div class="mod-split-asym">
-        <div class="mod-inset-left">
-            <div class="bg-layer tile vid" data-media="video" data-src="assets/img/projects/Avatar the last airbender/Nueva carpeta (6)/aba04_0050_0110_edt_ani_v009_opt.mp4">
-                <div class="vid-lazy" data-src="assets/img/projects/Avatar the last airbender/Nueva carpeta (6)/aba04_0050_0110_edt_ani_v009_opt.mp4">
-                    <video loop muted playsinline><source type="video/mp4"></video>
-                </div>
-            </div>
-            <div class="front-layer tile-wrap">
-                <div class="tile" data-media="img" data-src="assets/img/projects/Avatar the last airbender/Nueva carpeta (6)/DETAIL.webp">
-                    <img src="assets/img/projects/Avatar the last airbender/Nueva carpeta (6)/DETAIL.webp" alt="NC6 Detail">
-                </div>
-                <div class="caption-accent">Detail</div>
-            </div>
-        </div>
-        <div class="tile-wrap">
-            <div class="tile" data-media="img" data-src="assets/img/projects/Avatar the last airbender/Nueva carpeta (6)/Screenshot 2025-05-23 174007.webp">
-                <img src="assets/img/projects/Avatar the last airbender/Nueva carpeta (6)/Screenshot 2025-05-23 174007.webp" alt="NC6 Master">
-            </div>
-            <div class="caption-simple">Master</div>
-        </div>
-    </div>
-
-    <!-- SHOT — FW: center video with wing masters -->
-    <div class="mod-center-wings">
-        <div class="wing-left tile-wrap">
-            <div class="tile" data-media="img" data-src="assets/img/projects/Avatar the last airbender/FW/Screenshot 2025-05-23 165217.webp">
-                <img src="assets/img/projects/Avatar the last airbender/FW/Screenshot 2025-05-23 165217.webp" alt="FW Master">
-            </div>
-            <div class="caption-simple" style="text-align:left;">Master</div>
-        </div>
-        <div class="center-vid tile-wrap">
-            <div class="tile vid" data-media="video" data-src="assets/img/projects/Avatar the last airbender/FW/bca05_1950_0020_cmp_del_v018_opt.mp4">
-                <div class="vid-lazy" data-src="assets/img/projects/Avatar the last airbender/FW/bca05_1950_0020_cmp_del_v018_opt.mp4">
-                    <video loop muted playsinline><source type="video/mp4"></video>
-                </div>
-            </div>
-        </div>
-        <div class="wing-right tile-wrap">
-            <div class="tile" data-media="img" data-src="assets/img/projects/Avatar the last airbender/FW/Screenshot 2025-05-23 165251.webp">
-                <img src="assets/img/projects/Avatar the last airbender/FW/Screenshot 2025-05-23 165251.webp" alt="FW Detail">
-            </div>
-            <div class="caption-simple">Detail</div>
-        </div>
-    </div>
-
-    <!-- SHOT — bt1010 full -->
-    <div class="mod-full" style="max-width:1400px;margin:0 auto;">
-        <div class="tile-wrap">
-            <div class="tile" data-media="img" data-src="assets/img/projects/Avatar the last airbender/bt1010 copy.webp">
-                <img src="assets/img/projects/Avatar the last airbender/bt1010 copy.webp" alt="BT1010">
-            </div>
-            <div class="caption-simple">Master</div>
-        </div>
-    </div>
-
-    <!-- SHOT — Nueva carpeta (2) -->
-    <div class="mod-stack" style="max-width:1300px;margin:0 auto;width:100%;">
-        <div class="tile-wrap" style="width:90%;">
-            <div class="tile vid" data-media="video" data-src="assets/img/projects/Avatar the last airbender/Nueva carpeta (2)/aya40_1300_0570_cmp_del_v009_opt.mp4">
-                <div class="vid-lazy" data-src="assets/img/projects/Avatar the last airbender/Nueva carpeta (2)/aya40_1300_0570_cmp_del_v009_opt.mp4">
-                    <video loop muted playsinline><source type="video/mp4"></video>
-                </div>
-            </div>
-        </div>
-        <div class="mod-split" style="width:100%;">
-            <div class="tile-wrap">
-                <div class="tile" data-media="img" data-src="assets/img/projects/Avatar the last airbender/Nueva carpeta (2)/Screenshot 2025-05-23 170856.webp">
-                    <img src="assets/img/projects/Avatar the last airbender/Nueva carpeta (2)/Screenshot 2025-05-23 170856.webp" alt="NC2 Master">
-                </div>
-                <div class="caption-simple">Master</div>
-            </div>
-            <div class="tile-wrap">
-                <div class="tile" data-media="img" data-src="assets/img/projects/Avatar the last airbender/Nueva carpeta (2)/Screenshot 2025-05-23 171006.webp">
-                    <img src="assets/img/projects/Avatar the last airbender/Nueva carpeta (2)/Screenshot 2025-05-23 171006.webp" alt="NC2 Detail">
-                </div>
-                <div class="caption-simple">Detail</div>
-            </div>
-        </div>
-    </div>
-
-    <!-- SHOT — Nueva carpeta (3) -->
-    <div class="mod-split-asym" style="align-items:start;">
-        <div class="tile-wrap">
-            <div class="tile vid" data-media="video" data-src="assets/img/projects/Avatar the last airbender/Nueva carpeta (3)/aya65_1300_0740_cmp_del_v012_opt.mp4">
-                <div class="vid-lazy" data-src="assets/img/projects/Avatar the last airbender/Nueva carpeta (3)/aya65_1300_0740_cmp_del_v012_opt.mp4">
-                    <video loop muted playsinline><source type="video/mp4"></video>
-                </div>
-            </div>
-            <div class="caption-simple">Shot</div>
-        </div>
-        <div class="mod-stack">
-            <div class="tile-wrap">
-                <div class="tile" data-media="img" data-src="assets/img/projects/Avatar the last airbender/Nueva carpeta (3)/Screenshot 2025-05-23 170207.webp">
-                    <img src="assets/img/projects/Avatar the last airbender/Nueva carpeta (3)/Screenshot 2025-05-23 170207.webp" alt="NC3 Master">
-                </div>
-                <div class="caption-simple">Master</div>
-            </div>
-            <div class="tile-wrap">
-                <div class="tile" data-media="img" data-src="assets/img/projects/Avatar the last airbender/Nueva carpeta (3)/Screenshot 2025-05-23 170248.webp">
-                    <img src="assets/img/projects/Avatar the last airbender/Nueva carpeta (3)/Screenshot 2025-05-23 170248.webp" alt="NC3 Detail">
-                </div>
-                <div class="caption-simple">Detail</div>
-            </div>
-        </div>
-    </div>
-
-    <!-- SHOT — Nueva carpeta (4) -->
-    <div class="mod-stack" style="max-width:1300px;margin:0 auto;width:100%;">
-        <div class="tile-wrap" style="width:85%;">
-            <div class="tile vid" data-media="video" data-src="assets/img/projects/Avatar the last airbender/Nueva carpeta (4)/bka15_2500_0060_cmp_del_v006_opt.mp4">
-                <div class="vid-lazy" data-src="assets/img/projects/Avatar the last airbender/Nueva carpeta (4)/bka15_2500_0060_cmp_del_v006_opt.mp4">
-                    <video loop muted playsinline><source type="video/mp4"></video>
-                </div>
-            </div>
-        </div>
-        <div class="mod-split" style="width:100%;">
-            <div class="tile-wrap">
-                <div class="tile" data-media="img" data-src="assets/img/projects/Avatar the last airbender/Nueva carpeta (4)/Screenshot 2025-05-23 171629.webp">
-                    <img src="assets/img/projects/Avatar the last airbender/Nueva carpeta (4)/Screenshot 2025-05-23 171629.webp" alt="NC4 Master">
-                </div>
-                <div class="caption-simple">Master</div>
-            </div>
-            <div class="tile-wrap">
-                <div class="tile" data-media="img" data-src="assets/img/projects/Avatar the last airbender/Nueva carpeta (4)/Screenshot 2025-05-23 171718.webp">
-                    <img src="assets/img/projects/Avatar the last airbender/Nueva carpeta (4)/Screenshot 2025-05-23 171718.webp" alt="NC4 Detail">
-                </div>
-                <div class="caption-simple">Detail</div>
-            </div>
-        </div>
-    </div>
-
-    <!-- SHOT — Nueva carpeta (5) -->
-    <div class="mod-split-asym">
-        <div class="tile-wrap">
-            <div class="tile" data-media="img" data-src="assets/img/projects/Avatar the last airbender/Nueva carpeta (5)/Screenshot 2025-05-23 175501.webp">
-                <img src="assets/img/projects/Avatar the last airbender/Nueva carpeta (5)/Screenshot 2025-05-23 175501.webp" alt="NC5 Master">
-            </div>
-            <div class="caption-simple">Master</div>
-        </div>
-        <div class="tile-wrap">
-            <div class="tile vid" data-media="video" data-src="assets/img/projects/Avatar the last airbender/Nueva carpeta (5)/aba08_0050_0130_cmp_cmp_v006_opt.mp4">
-                <div class="vid-lazy" data-src="assets/img/projects/Avatar the last airbender/Nueva carpeta (5)/aba08_0050_0130_cmp_cmp_v006_opt.mp4">
-                    <video loop muted playsinline><source type="video/mp4"></video>
-                </div>
-            </div>
-            <div class="caption-simple">Shot</div>
-        </div>
-    </div>
-
-    <!-- SHOT — QFQQC -->
-    <div class="mod-stack" style="max-width:1200px;margin:0 auto;width:100%;">
-        <div class="tile-wrap" style="width:90%;">
-            <div class="tile vid" data-media="video" data-src="assets/img/projects/Avatar the last airbender/QFQQC/aba04_0050_0040_cmp_cmp_v006_opt.mp4">
-                <div class="vid-lazy" data-src="assets/img/projects/Avatar the last airbender/QFQQC/aba04_0050_0040_cmp_cmp_v006_opt.mp4">
-                    <video loop muted playsinline><source type="video/mp4"></video>
-                </div>
-            </div>
-        </div>
-        <div class="tile-wrap" style="width:80%;align-self:flex-end;">
-            <div class="tile" data-media="img" data-src="assets/img/projects/Avatar the last airbender/QFQQC/Screenshot 2025-05-23 173714.webp">
-                <img src="assets/img/projects/Avatar the last airbender/QFQQC/Screenshot 2025-05-23 173714.webp" alt="QFQQC Master">
-            </div>
-            <div class="caption-simple">Master</div>
-        </div>
-    </div>
-
-    <!-- SHOT — FEWQQ -->
-    <div class="mod-stack" style="max-width:1200px;margin:0 auto;width:100%;">
-        <div class="tile-wrap" style="width:90%;">
-            <div class="tile vid" data-media="video" data-src="assets/img/projects/Avatar the last airbender/FEWQQ/aca05_0125_0030_cmp_pcmp_v007_opt.mp4">
-                <div class="vid-lazy" data-src="assets/img/projects/Avatar the last airbender/FEWQQ/aca05_0125_0030_cmp_pcmp_v007_opt.mp4">
-                    <video loop muted playsinline><source type="video/mp4"></video>
-                </div>
-            </div>
-        </div>
-        <div class="mod-overlap-tr" style="width:85%;margin-top:3rem;">
-            <div class="main-layer tile-wrap">
-                <div class="tile" data-media="img" data-src="assets/img/projects/Avatar the last airbender/FEWQQ/Screenshot 2025-07-28 134446.webp">
-                    <img src="assets/img/projects/Avatar the last airbender/FEWQQ/Screenshot 2025-07-28 134446.webp" alt="FEWQQ Master">
-                </div>
-                <div class="caption-highlight">Master</div>
-            </div>
-            <div class="top-right-layer tile-wrap">
-                <div class="tile" data-media="img" data-src="assets/img/projects/Avatar the last airbender/FEWQQ/Screenshot 2025-07-28 134517.webp">
-                    <img src="assets/img/projects/Avatar the last airbender/FEWQQ/Screenshot 2025-07-28 134517.webp" alt="FEWQQ Detail">
-                </div>
-                <div class="caption-simple" style="color:#fff;background:rgba(0,0,0,0.6);padding:0.2rem 0.5rem;display:inline-block;">Detail</div>
-            </div>
-        </div>
-    </div>
-
-    <!-- SHOT — Split warm BGs -->
-    <div class="mod-split">
-        <div class="tile-wrap">
-            <div class="tile" data-media="img" data-src="assets/img/projects/Avatar the last airbender/Screenshot 2025-05-23 174757.webp">
-                <img src="assets/img/projects/Avatar the last airbender/Screenshot 2025-05-23 174757.webp" alt="Warm BG">
-            </div>
-            <div class="caption-simple">Master</div>
-        </div>
-        <div class="tile-wrap">
-            <div class="tile" data-media="img" data-src="assets/img/projects/Avatar the last airbender/Screenshot 2025-05-23 174935.webp">
-                <img src="assets/img/projects/Avatar the last airbender/Screenshot 2025-05-23 174935.webp" alt="Warm Detail">
-            </div>
-            <div class="caption-simple">Detail</div>
-        </div>
-    </div>
-
-    <!-- SHOT — Nueva carpeta (8) -->
-    <div class="mod-stack">
-        <div class="tile-wrap">
-            <div class="tile" data-media="img" data-src="assets/img/projects/Avatar the last airbender/Nueva carpeta (8)/Screenshot 2025-07-28 141729.webp">
-                <img src="assets/img/projects/Avatar the last airbender/Nueva carpeta (8)/Screenshot 2025-07-28 141729.webp" alt="NC8 Master">
-            </div>
-            <div class="caption-simple">Master</div>
-        </div>
-        <div class="tile-wrap" style="width:80%;align-self:flex-start;">
-            <div class="tile vid" data-media="video" data-src="assets/img/projects/Avatar the last airbender/Nueva carpeta (8)/baa25_1400_0130_edt_ani_v008_opt.mp4">
-                <div class="vid-lazy" data-src="assets/img/projects/Avatar the last airbender/Nueva carpeta (8)/baa25_1400_0130_edt_ani_v008_opt.mp4">
-                    <video loop muted playsinline><source type="video/mp4"></video>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- SHOT — WDW -->
-    <div class="mod-stack" style="max-width:1300px;margin:0 auto;width:100%;">
-        <div class="tile-wrap" style="width:85%;">
-            <div class="tile vid" data-media="video" data-src="assets/img/projects/Avatar the last airbender/WDW/aba68_0050_4040_cmp_slp_v001_opt.mp4">
-                <div class="vid-lazy" data-src="assets/img/projects/Avatar the last airbender/WDW/aba68_0050_4040_cmp_slp_v001_opt.mp4">
-                    <video loop muted playsinline><source type="video/mp4"></video>
-                </div>
-            </div>
-        </div>
-        <div class="mod-split" style="width:100%;">
-            <div class="tile-wrap">
-                <div class="tile" data-media="img" data-src="assets/img/projects/Avatar the last airbender/WDW/Screenshot 2025-05-23 174314.webp">
-                    <img src="assets/img/projects/Avatar the last airbender/WDW/Screenshot 2025-05-23 174314.webp" alt="WDW Master">
-                </div>
-                <div class="caption-simple">Master</div>
-            </div>
-            <div class="tile-wrap">
-                <div class="tile" data-media="img" data-src="assets/img/projects/Avatar the last airbender/WDW/Screenshot 2026-04-03 204551.webp">
-                    <img src="assets/img/projects/Avatar the last airbender/WDW/Screenshot 2026-04-03 204551.webp" alt="WDW Detail">
-                </div>
-                <div class="caption-simple">Detail</div>
-            </div>
-        </div>
-    </div>
-
-    <!-- SHOT — Tree + cool BG -->
-    <div class="mod-split" style="max-width:1400px;margin:0 auto;">
-        <div class="tile-wrap">
-            <div class="tile" data-media="img" data-src="assets/img/projects/Avatar the last airbender/TREE WORK.webp">
-                <img src="assets/img/projects/Avatar the last airbender/TREE WORK.webp" alt="Tree">
-            </div>
-            <div class="caption-simple">Master</div>
-        </div>
-        <div class="tile-wrap">
-            <div class="tile" data-media="img" data-src="assets/img/projects/Avatar the last airbender/Screenshot 2025-05-23 175318.webp">
-                <img src="assets/img/projects/Avatar the last airbender/Screenshot 2025-05-23 175318.webp" alt="Cool BG">
-            </div>
-            <div class="caption-simple">Master</div>
-        </div>
-    </div>
-
-    <!-- SHOT — NC7 recording -->
-    <div class="mod-full" style="max-width:1200px;margin:0 auto;">
-        <div class="tile-wrap">
-            <div class="tile" data-media="img" data-src="assets/img/projects/Avatar the last airbender/Nueva carpeta (7)/Screenshot 2025-05-23 172542.webp">
-                <img src="assets/img/projects/Avatar the last airbender/Nueva carpeta (7)/Screenshot 2025-05-23 172542.webp" alt="NC7 Master">
-            </div>
-            <div class="caption-simple">Master</div>
-        </div>
-    </div>
-
-    <!-- SHOT — General masters spread -->
-    <div class="mod-split">
-        <div class="tile-wrap">
-            <div class="tile" data-media="img" data-src="assets/img/projects/Avatar the last airbender/Screenshot 2025-05-23 165504.webp">
-                <img src="assets/img/projects/Avatar the last airbender/Screenshot 2025-05-23 165504.webp" alt="BG Master A">
-            </div>
-            <div class="caption-simple">Master</div>
-        </div>
-        <div class="tile-wrap">
-            <div class="tile" data-media="img" data-src="assets/img/projects/Avatar the last airbender/Screenshot 2025-05-23 173329.webp">
-                <img src="assets/img/projects/Avatar the last airbender/Screenshot 2025-05-23 173329.webp" alt="BG Master B">
-            </div>
-            <div class="caption-simple">Master</div>
-        </div>
-    </div>
-
-</div><!-- /gallery -->
-
-<div class="side-contact" id="side-contact">
-    <a href="mailto:andresgonzalezmerino@gmail.com" class="side-btn">
-        <div class="mail-circle">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
-        </div>
-        <span>Get in Touch</span>
-    </a>
+    <div class="mod-full"><div class="tile-wrap"><div class="tile" data-media="img" data-src="assets/img/projects/Avatar the last airbender/Screenshot 2025-05-23 173329.webp"><img src="assets/img/projects/Avatar the last airbender/Screenshot 2025-05-23 173329.webp" alt="Blue Lake"></div><div class="caption-simple">Master</div></div></div>
+    <div class="mod-split-asym"><div class="mod-inset-left"><div class="bg-layer tile vid" data-media="video" data-src="assets/img/projects/Avatar the last airbender/Nueva carpeta (6)/aba04_0050_0110_edt_ani_v009_opt.mp4"><video autoplay loop muted playsinline><source src="assets/img/projects/Avatar the last airbender/Nueva carpeta (6)/aba04_0050_0110_edt_ani_v009_opt.mp4" type="video/mp4"></video></div><div class="front-layer tile-wrap"><div class="tile" data-media="img" data-src="assets/img/projects/Avatar the last airbender/Nueva carpeta (6)/DETAIL.webp"><img src="assets/img/projects/Avatar the last airbender/Nueva carpeta (6)/DETAIL.webp" alt="NC6 Detail"></div><div class="caption-accent">Detail</div></div></div><div class="tile-wrap"><div class="tile" data-media="img" data-src="assets/img/projects/Avatar the last airbender/Nueva carpeta (6)/Screenshot 2025-05-23 174007.webp"><img src="assets/img/projects/Avatar the last airbender/Nueva carpeta (6)/Screenshot 2025-05-23 174007.webp" alt="NC6 Master"></div><div class="caption-simple">Master</div></div></div>
+    <div class="mod-center-wings"><div class="wing-left tile-wrap"><div class="tile" data-media="img" data-src="assets/img/projects/Avatar the last airbender/FW/Screenshot 2025-05-23 165217.webp"><img src="assets/img/projects/Avatar the last airbender/FW/Screenshot 2025-05-23 165217.webp" alt="FW Master"></div><div class="caption-simple" style="text-align: left;">Master</div></div><div class="center-vid tile-wrap"><div class="tile vid" data-media="video" data-src="assets/img/projects/Avatar the last airbender/FW/bca05_1950_0020_cmp_del_v018_opt.mp4"><video autoplay loop muted playsinline><source src="assets/img/projects/Avatar the last airbender/FW/bca05_1950_0020_cmp_del_v018_opt.mp4" type="video/mp4"></video></div></div><div class="wing-right tile-wrap"><div class="tile" data-media="img" data-src="assets/img/projects/Avatar the last airbender/FW/Screenshot 2025-05-23 165251.webp"><img src="assets/img/projects/Avatar the last airbender/FW/Screenshot 2025-05-23 165251.webp" alt="FW Detail"></div><div class="caption-simple">Detail</div></div></div>
+    <div class="mod-full" style="max-width: 1400px; margin: 0 auto;"><div class="tile-wrap"><div class="tile" data-media="img" data-src="assets/img/projects/Avatar the last airbender/bt1010 copy.webp"><img src="assets/img/projects/Avatar the last airbender/bt1010 copy.webp" alt="BT1010"></div><div class="caption-simple">Master</div></div></div>
+    <div class="mod-stack" style="max-width: 1200px; margin: 0 auto; width: 100%;"><div class="tile-wrap" style="width: 90%;"><div class="tile vid" data-media="video" data-src="assets/img/projects/Avatar the last airbender/FEWQQ/aca05_0125_0030_cmp_pcmp_v007_opt.mp4"><video autoplay loop muted playsinline><source src="assets/img/projects/Avatar the last airbender/FEWQQ/aca05_0125_0030_cmp_pcmp_v007_opt.mp4" type="video/mp4"></video></div></div><div class="mod-overlap-tr" style="width: 85%; margin-top: 3rem;"><div class="main-layer tile-wrap"><div class="tile" data-media="img" data-src="assets/img/projects/Avatar the last airbender/FEWQQ/Screenshot 2025-07-28 134446.webp"><img src="assets/img/projects/Avatar the last airbender/FEWQQ/Screenshot 2025-07-28 134446.webp" alt="FEWQQ Master"></div><div class="caption-highlight">Master</div></div><div class="top-right-layer tile-wrap"><div class="tile" data-media="img" data-src="assets/img/projects/Avatar the last airbender/FEWQQ/Screenshot 2025-07-28 134517.webp"><img src="assets/img/projects/Avatar the last airbender/FEWQQ/Screenshot 2025-07-28 134517.webp" alt="FEWQQ Detail"></div><div class="caption-simple" style="color: #fff; background: rgba(0,0,0,0.6); padding: 0.2rem 0.5rem; display: inline-block;">Detail</div></div></div></div>
+    <div class="mod-split"><div class="tile-wrap"><div class="tile" data-media="img" data-src="assets/img/projects/Avatar the last airbender/Screenshot 2025-05-23 174757.webp"><img src="assets/img/projects/Avatar the last airbender/Screenshot 2025-05-23 174757.webp" alt="Warm BG"></div><div class="caption-simple">Master</div></div><div class="tile-wrap"><div class="tile" data-media="img" data-src="assets/img/projects/Avatar the last airbender/Screenshot 2025-05-23 174935.webp"><img src="assets/img/projects/Avatar the last airbender/Screenshot 2025-05-23 174935.webp" alt="Warm Detail"></div><div class="caption-simple">Detail</div></div></div>
+    <div class="mod-stack"><div class="tile-wrap"><div class="tile" data-media="img" data-src="assets/img/projects/Avatar the last airbender/Nueva carpeta (8)/Screenshot 2025-07-28 141729.webp"><img src="assets/img/projects/Avatar the last airbender/Nueva carpeta (8)/Screenshot 2025-07-28 141729.webp" alt="NC8 Master"></div><div class="caption-simple">Master</div></div><div class="tile-wrap" style="width: 80%; align-self: flex-start;"><div class="tile vid" data-media="video" data-src="assets/img/projects/Avatar the last airbender/Nueva carpeta (8)/baa25_1400_0130_edt_ani_v008_opt.mp4"><video autoplay loop muted playsinline><source src="assets/img/projects/Avatar the last airbender/Nueva carpeta (8)/baa25_1400_0130_edt_ani_v008_opt.mp4" type="video/mp4"></video></div></div></div>
+    <div class="mod-split" style="max-width: 1400px; margin: 0 auto;"><div class="tile-wrap"><div class="tile" data-media="img" data-src="assets/img/projects/Avatar the last airbender/TREE WORK.webp"><img src="assets/img/projects/Avatar the last airbender/TREE WORK.webp" alt="Tree"></div><div class="caption-simple">Master</div></div><div class="tile-wrap"><div class="tile" data-media="img" data-src="assets/img/projects/Avatar the last airbender/Screenshot 2025-05-23 175318.webp"><img src="assets/img/projects/Avatar the last airbender/Screenshot 2025-05-23 175318.webp" alt="Cool BG"></div><div class="caption-simple">Master</div></div></div>
 </div>
-
-<div class="lb" id="lb">
-    <div class="lb-bg" id="lb-bg"></div>
-    <div class="lb-content" id="lb-content">
-        <div class="lb-meta" id="lb-meta"></div>
-        <div class="lb-nav">
-            <span id="lb-prev">&#8592; PREV</span>
-            <span id="lb-close">CLOSE</span>
-            <span id="lb-next">NEXT &#8594;</span>
-        </div>
-    </div>
-</div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+<div class="side-contact" id="side-contact"><a href="mailto:andresgonzalezmerino@gmail.com" class="side-btn"><div class="mail-circle"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg></div><span>Get in Touch</span></a></div>
+<div class="lb" id="lb"><div class="lb-bg" id="lb-bg"></div><div class="lb-content" id="lb-content"><div class="lb-meta" id="lb-meta"></div><div class="lb-nav"><span id="lb-prev">&#8592; PREV</span><span id="lb-close">CLOSE</span><span id="lb-next">NEXT &#8594;</span></div></div></div>
 <script>
-(function(){
-    const t = document.getElementById('menu-toggle');
-    const o = document.getElementById('mobile-nav');
-    if(t && o) {
-        t.onclick = function(e) {
-            e.preventDefault();
-            o.classList.toggle('active');
-        };
-    }
-})();</script>
+    const nav = document.getElementById('main-nav'); const sideContact = document.getElementById('side-contact');
+    window.addEventListener('scroll', () => { if (window.scrollY > 200) { sideContact.classList.add('visible'); } else { sideContact.classList.remove('visible'); } });
+    const lb = document.getElementById('lb'); const lbImg = document.getElementById('lb-img'); const lbCon = document.getElementById('lb-content'); const lbMeta = document.getElementById('lb-meta');
+    const tiles = Array.from(document.querySelectorAll('.tile')); const items = tiles.map(t => ({ type: t.dataset.media, src: t.dataset.src }));
+    let current = 0; let lbMedia = null;
+    function openLb(i) { current = i; showItem(); lb.classList.add('on'); document.body.style.overflow = 'hidden'; }
+    function showItem() { if (lbMedia) lbMedia.remove(); const item = items[current]; lbMeta.textContent = item.src.split('/').pop();
+        if (item.type === 'video') { lbMedia = document.createElement('video'); lbMedia.autoplay = true; lbMedia.loop = true; lbMedia.muted = true; lbMedia.playsInline = true; lbMedia.controls = true; const src = document.createElement('source'); src.src = item.src; src.type = 'video/mp4'; lbMedia.appendChild(src); }
+        else { lbMedia = document.createElement('img'); lbMedia.src = item.src; }
+        lbCon.insertBefore(lbMedia, document.querySelector('.lb-nav')); }
+    function closeLb() { lb.classList.remove('on'); document.body.style.overflow = ''; setTimeout(() => { if (lbMedia) { lbMedia.remove(); lbMedia = null; } }, 500); }
+    function go(dir) { current = (current + dir + items.length) % items.length; showItem(); }
+    tiles.forEach((t, i) => t.addEventListener('click', () => openLb(i)));
+    document.getElementById('lb-prev').addEventListener('click', e => { e.stopPropagation(); go(-1); }); document.getElementById('lb-next').addEventListener('click', e => { e.stopPropagation(); go(1); }); document.getElementById('lb-close').addEventListener('click', e => { e.stopPropagation(); closeLb(); }); document.getElementById('lb-bg').addEventListener('click', closeLb);
+    document.addEventListener('keydown', e => { if (!lb.classList.contains('on')) return; if (e.key === 'Escape') closeLb(); if (e.key === 'ArrowLeft') go(-1); if (e.key === 'ArrowRight') go(1); });
+</script>
 </body>
 </html>

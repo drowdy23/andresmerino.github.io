@@ -6,131 +6,269 @@
     <title>Andrés Merino — Visual Development</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500&family=EB+Garamond:ital,wght@0,400;1,400&display=swap" rel="stylesheet">
-    
-/* ── UNIVERSAL HEADER V10 (FORCE OVERRIDE) ── */
-#universal-nav {
-    position: fixed !important;
-    top: 0 !important; left: 0 !important; right: 0 !important;
-    height: 70px !important;
-    background: rgba(3,3,3,0.95) !important;
-    backdrop-filter: blur(20px) !important;
-    display: flex !important;
-    flex-direction: row !important;
-    justify-content: space-between !important;
-    align-items: center !important;
-    padding: 0 1.5rem !important;
-    z-index: 9999999 !important;
-    border-bottom: 1px solid rgba(255,255,255,0.1) !important;
-}
+    <style>
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
-#universal-nav .nav-back, 
-#universal-nav .nav-logo, 
-#universal-nav .menu-toggle {
-    pointer-events: auto !important;
-    display: flex !important;
-    align-items: center !important;
-    font-family: 'Space Mono', monospace !important;
-    text-transform: uppercase !important;
-    text-decoration: none !important;
-}
+        :root {
+            --bg: #050505;
+            --text: #e5e5e5;
+            --muted: #555555;
+            --dim: #222222;
+            --border: rgba(255,255,255,0.06);
+        }
 
-#universal-nav .nav-back { font-size: 10px !important; color: #fff !important; flex: 1 !important; justify-content: flex-start !important; }
-#universal-nav .nav-logo { font-size: 12px !important; font-weight: 700 !important; color: #fff !important; flex: 1 !important; justify-content: center !important; }
-#universal-nav .menu-toggle { 
-    flex: 1 !important; justify-content: flex-end !important;
-    background: none !important; border: none !important; padding: 10px !important; 
-}
-#universal-nav .menu-toggle span { display: block !important; width: 22px !important; height: 1.5px !important; background: #fff !important; }
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            -webkit-font-smoothing: antialiased;
+            overflow: hidden; /* Lock scroll for the index, it's a single screen experience */
+        }
 
-.mobile-nav-overlay {
-    position: fixed !important; inset: 0 !important;
-    background: rgba(3,3,3,0.98) !important;
-    z-index: 9999998 !important;
-    display: flex !important; flex-direction: column !important; justify-content: center !important; align-items: center !important; gap: 30px !important;
-    opacity: 0 !important; visibility: hidden !important;
-    transition: all 0.4s ease !important;
-}
-.mobile-nav-overlay.active { opacity: 1 !important; visibility: visible !important; }
-.mobile-nav-overlay a { color: #888 !important; text-decoration: none !important; font-family: 'Space Mono', monospace !important; }
+        /* ── GLOBAL NAV ── */
+        nav {
+            position: fixed;
+            top: 0; left: 0; right: 0;
+            padding: 3rem 4rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 100;
+            pointer-events: none;
+        }
 
-@media (min-width: 1025px) {
-    #universal-nav { padding: 0 4rem !important; height: 90px !important; background: none !important; border: none !important; backdrop-filter: none !important; }
-    #universal-nav .menu-toggle { display: none !important; }
-    #universal-nav .nav-logo { color: #555 !important; }
-    #universal-nav .nav-back { color: #555 !important; }
-}
+        .nav-logo, .nav-links a {
+            pointer-events: all;
+            font-size: 0.55rem;
+            letter-spacing: 0.3em;
+            text-transform: uppercase;
+            color: var(--muted);
+            text-decoration: none;
+            transition: color 0.4s ease;
+        }
 
-</style>
+        .nav-logo { color: #fff; font-weight: 500; }
+        .nav-links { display: flex; gap: 3rem; align-items: center; }
+        .nav-links a { transition: color 0.4s ease; }
+        .nav-links a:hover { color: #fff; }
+
+        /* ── LAYOUT ── */
+        .index-container {
+            display: grid;
+            grid-template-columns: 4fr 8fr; /* Asymmetric split */
+            height: 100vh;
+            width: 100vw;
+        }
+
+        /* Left Side: Typography & Menu */
+        .index-left {
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            padding: 4rem;
+            padding-bottom: 6rem;
+            border-right: 1px solid var(--border);
+            position: relative;
+            z-index: 2;
+            background: var(--bg);
+        }
+
+        .artist-title {
+            font-family: 'EB Garamond', serif;
+            font-size: clamp(3rem, 5vw, 5rem);
+            font-weight: 400;
+            line-height: 0.9;
+            letter-spacing: -0.02em;
+            color: #fff;
+            margin-bottom: 1.5rem;
+        }
+
+        .artist-subtitle {
+            font-size: 0.55rem;
+            letter-spacing: 0.4em;
+            text-transform: uppercase;
+            color: var(--muted);
+            margin-bottom: 2rem;
+        }
+
+        .contact-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.8rem;
+            font-family: 'Inter', sans-serif;
+            font-size: 0.6rem;
+            font-weight: 500;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            text-decoration: none !important;
+            color: #fff !important;
+            background: rgba(255,255,255,0.03);
+            border: 1px solid rgba(255,255,255,0.15);
+            padding: 0.9rem 1.6rem;
+            border-radius: 4px;
+            margin-bottom: 4rem;
+            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+            align-self: flex-start;
+        }
+
+        .contact-btn:hover {
+            background: #fff;
+            color: #000 !important;
+            border-color: #fff;
+            transform: translateX(5px);
+            box-shadow: 0 10px 30px rgba(255,255,255,0.1);
+        }
+
+        .contact-btn svg {
+            transition: transform 0.4s ease;
+            stroke: currentColor;
+        }
+
+        .contact-btn:hover svg {
+            transform: translateX(4px);
+        }
+
+        /* ── PROJECTS MENU ── */
+        .menu-header {
+            font-family: 'Space Mono', monospace;
+            font-size: 0.45rem;
+            letter-spacing: 0.3em;
+            text-transform: uppercase;
+            color: #444;
+            margin-bottom: 2rem;
+            border-bottom: 1px solid var(--border);
+            padding-bottom: 1rem;
+        }
+
+        .project-list {
+            display: flex;
+            flex-direction: column;
+            gap: 2.5rem;
+        }
+
+        .project-link {
+            display: flex;
+            flex-direction: column;
+            text-decoration: none;
+            color: var(--muted);
+            transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), color 0.4s ease;
+            transform-origin: left center;
+        }
+
+        .project-link:hover {
+            color: #fff;
+            transform: translateX(10px);
+        }
+
+        .project-link .num {
+            font-family: 'EB Garamond', serif;
+            font-style: italic;
+            font-size: 0.9rem;
+            color: var(--muted);
+            margin-bottom: 0.3rem;
+            transition: color 0.4s ease;
+        }
+
+        .project-link:hover .num { color: #fff; }
+
+        .project-link .name {
+            font-size: 1.2rem;
+            font-weight: 400;
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
+            margin-bottom: 0.5rem;
+        }
+
+        .project-link .tags {
+            font-family: 'Inter', sans-serif;
+            font-size: 0.75rem;
+            font-weight: 300;
+            letter-spacing: 0.05em;
+            color: #666;
+            transition: color 0.4s ease;
+        }
+
+        .project-link:hover .tags { color: #aaa; }
+
+        /* The NDA Link */
+        .nda-link {
+            margin-top: 1rem;
+            padding-top: 2.5rem;
+            border-top: 1px solid var(--border);
+        }
+        .index-right {
+            position: relative;
+            height: 100vh;
+            overflow: hidden;
+            background: #000;
+        }
+
+        .index-right img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: center 20%; /* Keep focus on the characters */
+            opacity: 0;
+            animation: heroReveal 2.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+            transition: transform 1.5s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .index-right:hover img {
+            transform: scale(1.02);
+        }
+
+        @keyframes heroReveal {
+            from { transform: scale(1.05); opacity: 0; }
+            to   { transform: scale(1);   opacity: 0.9; }
+        }
+
+        /* Subtle overlay to blend the image into the background slightly */
+        .index-right::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(to right, var(--bg) 0%, transparent 15%);
+            pointer-events: none;
+        }
+
+        /* ── RESPONSIVE ── */
+        @media (max-width: 1024px) {
+            body { overflow: auto; }
+            .index-container {
+                grid-template-columns: 1fr;
+                height: auto;
+                min-height: 100vh;
+                display: flex;
+                flex-direction: column-reverse;
+            }
+            .index-left {
+                border-right: none;
+                padding-top: 4rem;
+            }
+            .index-right {
+                height: 60vh;
+                width: 100%;
+                border-bottom: 1px solid var(--border);
+            }
+            .index-right::after {
+                background: linear-gradient(to bottom, transparent 60%, var(--bg) 100%);
+            }
+            .nav-links { display: none; } /* Hide on extreme mobile or move to footer */
+        }
+    </style>
 </head>
 <body>
 
-<nav id="universal-nav">
-    <div style="flex:1;"></div>
+<nav>
     <div class="nav-logo">AM</div>
-    <button class="menu-toggle" id="menu-toggle" aria-label="Menu"><span></span><span></span></button>
+    <div class="nav-links">
+        <a href="nda-login.html">NDA Access</a>
+        <a href="mailto:andresgonzalezmerino@gmail.com" class="contact-btn">
+            Get in Touch 
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="margin-bottom:-2px;"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+        </a>
+    </div>
 </nav>
-<div class="mobile-nav-overlay" id="mobile-nav">
-    <a href="index.html">HOME</a>
-    <a href="project-personal.html">PERSONAL WORK</a>
-    <a href="project-kayara.html">KAYARA</a>
-    <a href="project-tales.html">TALES FROM SUBURBIA</a>
-    <a href="project-avatar.html">AVATAR</a>
-    <a href="project-dads-house.html">DAD'S HOUSE</a>
-    <a href="nda-login.html">PRIVATE VAULT</a>
-</div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 <div class="index-container">
     
@@ -181,28 +319,5 @@
 
 </div>
 
-
-
-
-
-
-
-
-
-
-
-
-
-<script>
-(function(){
-    const t = document.getElementById('menu-toggle');
-    const o = document.getElementById('mobile-nav');
-    if(t && o) {
-        t.onclick = function(e) {
-            e.preventDefault();
-            o.classList.toggle('active');
-        };
-    }
-})();</script>
 </body>
 </html>

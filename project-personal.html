@@ -5,242 +5,70 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Personal Work — Andrés Merino</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;700&family=EB+Garamond:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet">
-    
-/* ── UNIVERSAL HEADER V10 (FORCE OVERRIDE) ── */
-#universal-nav {
-    position: fixed !important;
-    top: 0 !important; left: 0 !important; right: 0 !important;
-    height: 70px !important;
-    background: rgba(3,3,3,0.95) !important;
-    backdrop-filter: blur(20px) !important;
-    display: flex !important;
-    flex-direction: row !important;
-    justify-content: space-between !important;
-    align-items: center !important;
-    padding: 0 1.5rem !important;
-    z-index: 9999999 !important;
-    border-bottom: 1px solid rgba(255,255,255,0.1) !important;
-}
-
-#universal-nav .nav-back, 
-#universal-nav .nav-logo, 
-#universal-nav .menu-toggle {
-    pointer-events: auto !important;
-    display: flex !important;
-    align-items: center !important;
-    font-family: 'Space Mono', monospace !important;
-    text-transform: uppercase !important;
-    text-decoration: none !important;
-}
-
-#universal-nav .nav-back { font-size: 10px !important; color: #fff !important; flex: 1 !important; justify-content: flex-start !important; }
-#universal-nav .nav-logo { font-size: 12px !important; font-weight: 700 !important; color: #fff !important; flex: 1 !important; justify-content: center !important; }
-#universal-nav .menu-toggle { 
-    flex: 1 !important; justify-content: flex-end !important;
-    background: none !important; border: none !important; padding: 10px !important; 
-}
-#universal-nav .menu-toggle span { display: block !important; width: 22px !important; height: 1.5px !important; background: #fff !important; }
-
-.mobile-nav-overlay {
-    position: fixed !important; inset: 0 !important;
-    background: rgba(3,3,3,0.98) !important;
-    z-index: 9999998 !important;
-    display: flex !important; flex-direction: column !important; justify-content: center !important; align-items: center !important; gap: 30px !important;
-    opacity: 0 !important; visibility: hidden !important;
-    transition: all 0.4s ease !important;
-}
-.mobile-nav-overlay.active { opacity: 1 !important; visibility: visible !important; }
-.mobile-nav-overlay a { color: #888 !important; text-decoration: none !important; font-family: 'Space Mono', monospace !important; }
-
-@media (min-width: 1025px) {
-    #universal-nav { padding: 0 4rem !important; height: 90px !important; background: none !important; border: none !important; backdrop-filter: none !important; }
-    #universal-nav .menu-toggle { display: none !important; }
-    #universal-nav .nav-logo { color: #555 !important; }
-    #universal-nav .nav-back { color: #555 !important; }
-}
-
-</style>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;700&family=EB+Garamond:ital,wght@0,400;1,400&display=swap" rel="stylesheet">
+    <style>
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+        :root { --bg: #050505; --surface: #0a0a0a; --border: rgba(255,255,255,0.06); --text: #e0e0e0; --muted: #555; }
+        body { font-family: 'Inter', sans-serif; background: var(--bg); color: var(--text); -webkit-font-smoothing: antialiased; overflow-x: hidden; }
+        nav { padding: 2rem 4rem; display: flex; justify-content: space-between; align-items: center; position: sticky; top: 0; z-index: 1000; background: rgba(5,5,5,0.95); backdrop-filter: blur(12px); border-bottom: 1px solid var(--border); }
+        .nav-back, .nav-logo { font-size: 0.55rem; letter-spacing: 0.25em; text-transform: uppercase; color: var(--muted); text-decoration: none; transition: color 0.3s; }
+        .nav-back:hover { color: #fff; }
+        .nav-logo { font-weight: 700; color: #fff; }
+        .hero { width: 100%; height: 80vh; position: relative; overflow: hidden; border-bottom: 1px solid var(--border); cursor: pointer; }
+        .hero img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+        .hero-title-wrap { position: absolute; bottom: 4rem; left: 4rem; z-index: 2; }
+        .hero-title { font-family: 'EB Garamond', serif; font-size: 5rem; font-weight: 400; color: #fff; line-height: 0.9; }
+        .section-intro { padding: 8rem 4rem 2rem; max-width: 1600px; margin: 0 auto; }
+        .section-intro h2 { font-family: 'EB Garamond', serif; font-size: 3rem; font-weight: 400; color: #fff; }
+        .room-illustration { padding: 2rem 4rem 10rem; max-width: 1600px; margin: 0 auto; display: flex; flex-direction: column; gap: 4rem; }
+        .arch-block { position: relative; width: 100%; }
+        [data-lb] { cursor: pointer; background: #000; display: block; overflow: hidden; border: 1px solid var(--border); }
+        [data-lb] img { width: 100%; display: block; transition: transform 0.8s ease; }
+        [data-lb]:hover img { transform: scale(1.02); }
+        .arch-label { font-size: 0.45rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--muted); margin-top: 1rem; }
+        .room-technical { background: var(--surface); padding: 8rem 4rem; border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
+        .grid-technical { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 2rem; max-width: 1600px; margin: 0 auto; }
+        .tech-card .label { font-size: 0.45rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--muted); margin-top: 1rem; }
+        .room-sketches { padding: 8rem 4rem; max-width: 1600px; margin: 0 auto; }
+        .collage-wrapper { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; }
+        .project-nav { padding: 4rem; display: flex; justify-content: space-between; border-top: 1px solid var(--border); }
+        .project-nav a { font-size: 0.55rem; letter-spacing: 0.25em; text-transform: uppercase; color: var(--muted); text-decoration: none; }
+        footer { padding: 2rem 4rem; border-top: 1px solid var(--border); display: flex; justify-content: space-between; font-size: 0.45rem; letter-spacing: 0.2em; text-transform: uppercase; color: #333; }
+        .lightbox { position: fixed; inset: 0; z-index: 10000; display: flex; align-items: center; justify-content: center; visibility: hidden; }
+        .lightbox.active { visibility: visible; }
+        .lb-backdrop { position: absolute; inset: 0; background: rgba(0,0,0,0.95); }
+        .lb-img-wrap img { max-width: 90vw; max-height: 85vh; position: relative; z-index: 2; }
+    </style>
 </head>
 <body>
-
-<nav id="universal-nav">
-    <a href="index.html" class="nav-back">← BACK</a>
-    <div class="nav-logo">AM</div>
-    <button class="menu-toggle" id="menu-toggle" aria-label="Menu"><span></span><span></span></button>
-</nav>
-<div class="mobile-nav-overlay" id="mobile-nav">
-    <a href="index.html">HOME</a>
-    <a href="project-personal.html">PERSONAL WORK</a>
-    <a href="project-kayara.html">KAYARA</a>
-    <a href="project-tales.html">TALES FROM SUBURBIA</a>
-    <a href="project-avatar.html">AVATAR</a>
-    <a href="project-dads-house.html">DAD'S HOUSE</a>
-    <a href="nda-login.html">PRIVATE VAULT</a>
-</div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<div class="grid-guides"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div>
-
-
-
-
-
-
-<div class="hero" data-lb>
-    <img src="assets/img/projects/Personal Work/Illustration/ultima+version.webp" alt="Selected Personal Work">
-    <div class="hero-title-wrap">
-        <h1 class="hero-title">Personal<br>Works</h1>
-    </div>
-</div>
-
+<nav><a href="index.html" class="nav-back">&#8592; Back</a><div class="nav-logo">AM</div></nav>
+<div class="hero" data-lb><img src="assets/img/projects/Personal Work/Illustration/ultima+version.webp" alt="Hero"><div class="hero-title-wrap"><h1 class="hero-title">Personal<br>Works</h1></div></div>
 <div class="section-intro"><h2>Environment Design</h2></div>
-
 <div class="room-illustration">
-    <div class="arch-block"><div class="a-1" data-lb><img src="assets/img/projects/Personal Work/Illustration/plein+airpril+8+COPIA.webp" alt="Plein Airpril"></div><div class="arch-label a-1-cap">01 &mdash; Atmospheric Scale</div></div>
-    <div class="arch-block"><div class="a-2" data-lb><img src="assets/img/projects/Personal Work/Illustration/boskexperimento+jpeg.webp" alt="Forest Study"></div><div class="arch-label a-2-cap">02 &mdash; Forest Study</div></div>
-    <div class="arch-block"><div class="arch-delimiter-v delim-1"></div><div class="a-3" data-lb><img src="assets/img/projects/Personal Work/Illustration/Screenshot 2026-04-03 165421.webp" alt="Interior Train"></div><div class="a-4" data-lb><img src="assets/img/projects/Personal Work/Illustration/plein13.webp" alt="Cows Environment"></div><div class="arch-label" style="grid-column: 2 / 5;">03 &mdash; Space Narrative</div><div class="arch-label" style="grid-column: 8 / 11; text-align: right;">04 &mdash; Color study</div></div>
-    <div class="arch-block" style="margin-bottom: 0;"><div class="arch-delimiter-v delim-2"></div><div class="a-5" data-lb><img src="assets/img/projects/Personal Work/Illustration/Plein+12+ruido+4.webp" alt="Light Study"></div><div class="a-6" data-lb><img src="assets/img/projects/Personal Work/Illustration/Screenshot 2026-04-03 165519.webp" alt="Bazaar Environment"></div><div class="arch-label" style="grid-column: 1 / 4;">05 &mdash; Hierarchy</div><div class="arch-label" style="grid-column: 5 / 8;">06 &mdash; Architectural Volumetrics</div></div>
+    <div class="arch-block"><div data-lb><img src="assets/img/projects/Personal Work/Illustration/plein+airpril+8+COPIA.webp" alt="Scale"></div><div class="arch-label">Atmospheric Scale</div></div>
+    <div class="arch-block"><div data-lb><img src="assets/img/projects/Personal Work/Illustration/boskexperimento+jpeg.webp" alt="Forest"></div><div class="arch-label">Forest Study</div></div>
 </div>
-
-<div class="section-intro"><h2>Character & Color</h2></div>
-
+<div class="section-intro"><h2>Technical & Sketches</h2></div>
 <div class="room-technical">
     <div class="grid-technical">
-        <div class="tech-card"><div data-lb><img src="assets/img/projects/Personal Work/Other/KAS.webp" alt="Study"></div><div class="label">KAS / Rendering</div></div>
-        <div class="tech-card"><div data-lb><img src="assets/img/projects/Personal Work/Other/punkikas.webp" alt="Study"></div><div class="label">Punk / Line & Value</div></div>
-        <div class="tech-card"><div data-lb><img src="assets/img/projects/Personal Work/Other/Ilustracion1-3.webp" alt="Study"></div><div class="label">Blocking / Color</div></div>
-        <div class="tech-card"><div data-lb><img src="assets/img/projects/Personal Work/Other/imagen_2025-05-28_210548523.webp" alt="Portrait Study 1"></div><div class="label">Portrait Study 01</div></div>
-        <div class="tech-card"><div data-lb><img src="assets/img/projects/Personal Work/Other/imagen_2025-05-28_210938795.webp" alt="Portrait Study 2"></div><div class="label">Portrait Study 02</div></div>
+        <div class="tech-card"><div data-lb><img src="assets/img/projects/Personal Work/Other/KAS.webp" alt="KAS"></div><div class="label">KAS / Rendering</div></div>
+        <div class="tech-card"><div data-lb><img src="assets/img/projects/Personal Work/Other/punkikas.webp" alt="Punk"></div><div class="label">Punk / Line</div></div>
     </div>
 </div>
-
-<div class="section-intro"><h2>Pencil & Process</h2></div>
-
 <div class="room-sketches">
     <div class="collage-wrapper">
-        <div class="sketch-item s-1"><div data-lb><img src="assets/img/projects/Personal Work/Other/imagen_2025-05-28_211140209.webp" alt="Sketch"></div></div>
-        <div class="sketch-item s-2"><div data-lb><img src="assets/img/projects/Personal Work/Other/imagen_2025-05-28_211217089.webp" alt="Sketch"></div></div>
-        <div class="sketch-item s-3"><div data-lb><img src="assets/img/projects/Personal Work/Other/imagen_2025-05-28_211242668.webp" alt="Sketch"></div></div>
-        <div class="sketch-item s-4"><div data-lb><img src="assets/img/projects/Personal Work/Other/imagen_2025-05-28_211308198.webp" alt="Sketch"></div></div>
-        <div class="sketch-item s-5"><div data-lb><img src="assets/img/projects/Personal Work/Other/imagen_2025-05-28_211332508.webp" alt="Sketch"></div></div>
-        <div class="sketch-item s-6"><div data-lb><img src="assets/img/projects/Personal Work/Other/imagen_2025-05-28_211456536.webp" alt="Sketch"></div></div>
+        <div data-lb><img src="assets/img/projects/Personal Work/Other/imagen_2025-05-28_211140209.webp" alt="Sketch"></div>
+        <div data-lb><img src="assets/img/projects/Personal Work/Other/imagen_2025-05-28_211217089.webp" alt="Sketch"></div>
+        <div data-lb><img src="assets/img/projects/Personal Work/Other/imagen_2025-05-28_211242668.webp" alt="Sketch"></div>
     </div>
 </div>
-
-<div class="project-nav"><a href="index.html">&#8592; Back to Work</a><a href="project-kayara.html">Next Project: Kayara &#8594;</a></div>
-
-<footer><span>&copy; 2026 Andrés Merino</span><span>All Rights Reserved</span></footer>
-
-<!-- Contact Beacon -->
-<div class="side-contact" id="side-contact">
-    <a href="mailto:andresgonzalezmerino@gmail.com" class="side-btn">
-        <div class="mail-circle">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
-        </div>
-        <span>Get in Touch</span>
-    </a>
-</div>
-
-<!-- Lightbox -->
-<div class="lightbox" id="lightbox">
-    <div class="lb-backdrop" id="lb-backdrop"></div>
-    <div class="lb-img-wrap"><img id="lb-img" src="" alt=""></div>
-    <div class="lb-controls"><span id="lb-prev">PREV</span><span id="lb-next">NEXT</span><span id="lb-close">CLOSE</span></div>
-</div>
-
+<div class="project-nav"><a href="index.html">&#8592; Back</a><a href="project-kayara.html">Next &#8594;</a></div>
+<footer><span>&copy; 2026 Andrés Merino</span></footer>
+<div class="lightbox" id="lightbox"><div class="lb-backdrop" id="lb-backdrop"></div><div class="lb-img-wrap"><img id="lb-img" src=""></div></div>
 <script>
-    const nav = document.getElementById('main-nav');
-    const sideContact = document.getElementById('side-contact');
-    window.addEventListener('scroll', () => {
-        nav.classList.toggle('scrolled', window.scrollY > 10);
-        if (window.scrollY > 200) { sideContact.classList.add('visible'); } else { sideContact.classList.remove('visible'); }
-    });
-    const lb = document.getElementById('lightbox');
-    const lbImg = document.getElementById('lb-img');
-    const triggers = Array.from(document.querySelectorAll('[data-lb]'));
-    const imgList = triggers.map(el => {
-        const img = el.tagName === 'DIV' && el.classList.contains('hero') ? el.querySelector('img') : el.querySelector('img');
-        return { src: img.src, alt: img.alt };
-    });
-    let current = 0;
-    function openLb(i) { current = i; lbImg.src = imgList[i].src; lbImg.style.opacity = '1'; lb.classList.add('active'); document.body.style.overflow = 'hidden'; }
-    function go(dir) { current = (current + dir + imgList.length) % imgList.length; lbImg.style.opacity = '0'; setTimeout(() => { lbImg.src = imgList[current].src; lbImg.style.opacity = '1'; }, 200); }
-    triggers.forEach((el, i) => el.addEventListener('click', () => openLb(i)));
-    document.getElementById('lb-close').addEventListener('click', () => { lb.classList.remove('active'); document.body.style.overflow = ''; });
-    document.getElementById('lb-backdrop').addEventListener('click', () => { lb.classList.remove('active'); document.body.style.overflow = ''; });
-    document.getElementById('lb-next').addEventListener('click', e => { e.stopPropagation(); go(1); });
-    document.getElementById('lb-prev').addEventListener('click', e => { e.stopPropagation(); go(-1); });
+    const lb = document.getElementById('lightbox'); const lbImg = document.getElementById('lb-img');
+    document.querySelectorAll('[data-lb]').forEach(el => el.onclick = () => { lbImg.src = el.querySelector('img').src; lb.classList.add('active'); });
+    document.getElementById('lb-backdrop').onclick = () => lb.classList.remove('active');
 </script>
-
-
-
-
-
-
-
-
-
-
-
-
-
-<script>
-(function(){
-    const t = document.getElementById('menu-toggle');
-    const o = document.getElementById('mobile-nav');
-    if(t && o) {
-        t.onclick = function(e) {
-            e.preventDefault();
-            o.classList.toggle('active');
-        };
-    }
-})();</script>
 </body>
 </html>

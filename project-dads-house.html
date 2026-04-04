@@ -6,130 +6,73 @@
     <title>Dad's House — NDA Archive</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;700&family=Space+Mono:wght@400;700&family=EB+Garamond:ital,wght@0,400;1,400&display=swap" rel="stylesheet">
-    
-/* ── UNIVERSAL HEADER V10 (FORCE OVERRIDE) ── */
-#universal-nav {
-    position: fixed !important;
-    top: 0 !important; left: 0 !important; right: 0 !important;
-    height: 70px !important;
-    background: rgba(3,3,3,0.95) !important;
-    backdrop-filter: blur(20px) !important;
-    display: flex !important;
-    flex-direction: row !important;
-    justify-content: space-between !important;
-    align-items: center !important;
-    padding: 0 1.5rem !important;
-    z-index: 9999999 !important;
-    border-bottom: 1px solid rgba(255,255,255,0.1) !important;
-}
+    <style>
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+        :root { --bg: #030303; --surface: #0a0a0a; --border: rgba(255,255,255,0.06); --border-light: rgba(255,255,255,0.12); --text: #e5e5e5; --muted: #666666; --accent: #b0b0b0; --blueprint: rgba(74, 120, 160, 0.05); }
+        body { font-family: 'Inter', sans-serif; background: var(--bg); color: var(--text); -webkit-font-smoothing: antialiased; overflow-x: hidden; background-image: linear-gradient(var(--border) 1px, transparent 1px), linear-gradient(90deg, var(--border) 1px, transparent 1px); background-size: 120px 120px; background-position: center center; background-attachment: fixed; }
+        nav { padding: 2rem 4rem; display: flex; justify-content: space-between; align-items: center; position: sticky; top: 0; z-index: 1000; background: rgba(3,3,3,0.95); backdrop-filter: blur(12px); border-bottom: 1px solid var(--border); }
+        .nav-back, .nav-logo { font-family: 'Space Mono', monospace; font-size: 0.55rem; letter-spacing: 0.25em; text-transform: uppercase; color: var(--muted); text-decoration: none; transition: color 0.3s; }
+        .nav-back:hover { color: #fff; }
+        .nav-logo { font-weight: 700; color: #fff; }
+        .secure-badge { display: flex; align-items: center; gap: 0.5rem; font-family: 'Space Mono', monospace; font-size: 0.45rem; color: var(--muted); text-transform: uppercase; letter-spacing: 0.2em; padding: 0.4rem 1rem; border: 1px solid var(--border); border-radius: 20px; }
+        .secure-dot { width: 4px; height: 4px; background: #6a6a6a; border-radius: 50%; }
+        .hero { width: 100%; height: 80vh; display: flex; position: relative; overflow: hidden; cursor: pointer; border-bottom: 1px solid var(--border); }
+        .hero img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; animation: heroReveal 2.5s cubic-bezier(0.16, 1, 0.3, 1) forwards; transition: transform 1.2s cubic-bezier(0.16, 1, 0.3, 1); }
+        .hero:hover img { transform: scale(1.02); }
+        @keyframes heroReveal { from { transform: scale(1.05); opacity: 0; } to { transform: scale(1); opacity: 1; } }
+        .hero::after { content: ''; position: absolute; inset: 0; background: linear-gradient(to top, rgba(3,3,3,0.9) 0%, transparent 40%); pointer-events: none; }
+        .hero-title-wrap { position: absolute; bottom: 4rem; left: 4rem; z-index: 2; pointer-events: none; }
+        .hero-title { font-family: 'EB Garamond', serif; font-size: clamp(4rem, 8vw, 7rem); font-weight: 400; line-height: 0.85; letter-spacing: -0.02em; color: #fff; text-shadow: 0 4px 40px rgba(0,0,0,0.8); margin-bottom: 1rem; }
+        .hero-subtitle { font-family: 'Space Mono', monospace; font-size: 0.55rem; letter-spacing: 0.3em; text-transform: uppercase; color: var(--accent); }
+        .section-intro { padding: 8rem 4rem 4rem; max-width: 1600px; margin: 0 auto; position: relative; z-index: 1; }
+        .section-intro h2 { font-family: 'EB Garamond', serif; font-size: 3.5rem; font-weight: 400; letter-spacing: -0.01em; color: #fff; margin-bottom: 1rem; }
+        .section-intro p { font-family: 'Space Mono', monospace; font-size: 0.55rem; letter-spacing: 0.3em; text-transform: uppercase; color: var(--muted); }
+        [data-lb] { position: relative; cursor: pointer; overflow: hidden; background: #000; display: block; border: 1px solid var(--border); }
+        [data-lb] img { width: 100%; height: auto; display: block; transition: transform 0.9s cubic-bezier(0.16, 1, 0.3, 1); }
+        [data-lb]:hover img { transform: scale(1.02); }
+        .tech-label { font-family: 'Space Mono', monospace; font-size: 0.45rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--muted); margin-top: 1rem; display: flex; justify-content: space-between; }
+        .tech-label span.shot { color: var(--accent); }
+        .room-color { max-width: 1600px; margin: 0 auto; padding: 0 4rem 10rem; }
+        .layout-cinematic { display: grid; grid-template-columns: repeat(12, 1fr); gap: 2.5rem; margin-bottom: 8rem; }
+        .lc-full { grid-column: 1 / 13; margin-bottom: 2rem; }
+        .lc-half-1 { grid-column: 1 / 7; } .lc-half-2 { grid-column: 7 / 13; }
+        .lc-wide { grid-column: 1 / 8; } .lc-narrow { grid-column: 8 / 13; }
+        .room-line { background: var(--surface); padding: 8rem 0 15rem; border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); position: relative; }
+        .room-line::before { content: ''; position: absolute; inset: 0; background-color: var(--blueprint); pointer-events: none; }
+        .line-container { max-width: 1600px; margin: 0 auto; padding: 0 4rem; }
+        .grid-blueprint { display: grid; grid-template-columns: repeat(auto-fill, minmax(400px, 1fr)); gap: 2px; background: var(--border-light); border: 1px solid var(--border-light); }
+        .blueprint-card { background: var(--surface); padding: 1.5rem; display: flex; flex-direction: column; gap: 1.5rem; }
+        .blueprint-feature { grid-column: 1 / -1; display: grid; grid-template-columns: 2fr 1fr; background: var(--surface); gap: 2rem; padding: 2rem; }
+        .project-nav { max-width: 1600px; margin: 0 auto; padding: 4rem; display: flex; justify-content: space-between; }
+        .project-nav a { font-family: 'Space Mono', monospace; font-size: 0.55rem; letter-spacing: 0.25em; text-transform: uppercase; color: var(--muted); text-decoration: none; transition: color 0.3s; }
+        .project-nav a:hover { color: #fff; }
+        footer { padding: 2.25rem 4rem; border-top: 1px solid var(--border); display: flex; justify-content: space-between; font-family: 'Space Mono', monospace; font-size: 0.45rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--dim); background: var(--bg); }
+        
+        .side-contact { position: fixed; right: 0; top: 50%; transform: translateY(-50%); z-index: 9999; opacity: 0; pointer-events: none; transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1); }
+        .side-contact.visible { opacity: 1; pointer-events: all; transform: translateY(-50%) translateX(-1rem); }
+        .side-btn { display: flex; flex-direction: column; align-items: center; justify-content: center; background: rgba(12, 12, 12, 0.8); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); color: #fff; padding: 1.5rem 1rem 2.2rem; text-decoration: none; border-radius: 100px; border: 1px solid rgba(255, 255, 255, 0.1); box-shadow: 0 15px 45px rgba(0,0,0,0.6); transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1); }
+        .mail-circle { width: 42px; height: 42px; background: #fff; color: #000; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin-bottom: 1.5rem; box-shadow: 0 0 20px rgba(255,255,255,0.3); transition: transform 0.4s ease, background 0.4s ease; }
+        .side-btn span { writing-mode: vertical-rl; transform: rotate(180deg); font-family: 'Inter', sans-serif; font-size: 0.65rem; font-weight: 500; letter-spacing: 0.35em; text-transform: uppercase; white-space: nowrap; opacity: 0.7; transition: opacity 0.4s ease; }
+        .side-btn:hover { background: #fff; color: #000; border-color: #fff; transform: translateY(-8px); }
+        .side-btn:hover .mail-circle { background: #000; color: #fff; transform: scale(1.1); }
+        .side-btn:hover span { opacity: 1; }
 
-#universal-nav .nav-back, 
-#universal-nav .nav-logo, 
-#universal-nav .menu-toggle {
-    pointer-events: auto !important;
-    display: flex !important;
-    align-items: center !important;
-    font-family: 'Space Mono', monospace !important;
-    text-transform: uppercase !important;
-    text-decoration: none !important;
-}
-
-#universal-nav .nav-back { font-size: 10px !important; color: #fff !important; flex: 1 !important; justify-content: flex-start !important; }
-#universal-nav .nav-logo { font-size: 12px !important; font-weight: 700 !important; color: #fff !important; flex: 1 !important; justify-content: center !important; }
-#universal-nav .menu-toggle { 
-    flex: 1 !important; justify-content: flex-end !important;
-    background: none !important; border: none !important; padding: 10px !important; 
-}
-#universal-nav .menu-toggle span { display: block !important; width: 22px !important; height: 1.5px !important; background: #fff !important; }
-
-.mobile-nav-overlay {
-    position: fixed !important; inset: 0 !important;
-    background: rgba(3,3,3,0.98) !important;
-    z-index: 9999998 !important;
-    display: flex !important; flex-direction: column !important; justify-content: center !important; align-items: center !important; gap: 30px !important;
-    opacity: 0 !important; visibility: hidden !important;
-    transition: all 0.4s ease !important;
-}
-.mobile-nav-overlay.active { opacity: 1 !important; visibility: visible !important; }
-.mobile-nav-overlay a { color: #888 !important; text-decoration: none !important; font-family: 'Space Mono', monospace !important; }
-
-@media (min-width: 1025px) {
-    #universal-nav { padding: 0 4rem !important; height: 90px !important; background: none !important; border: none !important; backdrop-filter: none !important; }
-    #universal-nav .menu-toggle { display: none !important; }
-    #universal-nav .nav-logo { color: #555 !important; }
-    #universal-nav .nav-back { color: #555 !important; }
-}
-
-</style>
+        .lightbox { position: fixed; inset: 0; z-index: 2000; display: flex; align-items: center; justify-content: center; visibility: hidden; pointer-events: none; }
+        .lightbox.active { visibility: visible; pointer-events: all; }
+        .lb-backdrop { position: absolute; inset: 0; background: rgba(3,3,3,0.98); opacity: 0; transition: opacity 0.5s ease; }
+        .lightbox.active .lb-backdrop { opacity: 1; }
+        .lb-img-wrap { position: relative; z-index: 2; opacity: 0; transform: scale(0.97) translateY(10px); transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1); }
+        .lightbox.active .lb-img-wrap { opacity: 1; transform: scale(1) translateY(0); }
+        .lb-img-wrap img { max-width: 90vw; max-height: 85vh; object-fit: contain; }
+        .lb-filename { position: absolute; top: -2.5rem; left: 0; font-family: 'Space Mono', monospace; font-size: 0.45rem; color: var(--muted); letter-spacing: 0.1em; }
+        .lb-controls { position: absolute; bottom: 3rem; width: 100%; display: flex; justify-content: center; gap: 4rem; font-family: 'Space Mono', monospace; font-size: 0.5rem; letter-spacing: 0.3em; color: var(--muted); }
+        .lb-controls span { cursor: pointer; transition: color 0.3s; }
+        .lb-controls span:hover { color: #fff; }
+        @media (max-width: 1024px) { nav, .section-intro, .room-color, .line-container, .project-nav { padding: 2rem; } .hero-title-wrap { left: 2rem; bottom: 2rem; } .hero-title { font-size: 3rem; } .layout-cinematic { display: flex; flex-direction: column; gap: 4rem; margin-bottom: 6rem; } .blueprint-feature { grid-template-columns: 1fr; } .side-contact { display: none; } }
+    </style>
 </head>
 <body>
-
-<nav id="universal-nav">
-    <a href="index.html" class="nav-back">← BACK</a>
-    <div class="nav-logo">AM</div>
-    <button class="menu-toggle" id="menu-toggle" aria-label="Menu"><span></span><span></span></button>
-</nav>
-<div class="mobile-nav-overlay" id="mobile-nav">
-    <a href="index.html">HOME</a>
-    <a href="project-personal.html">PERSONAL WORK</a>
-    <a href="project-kayara.html">KAYARA</a>
-    <a href="project-tales.html">TALES FROM SUBURBIA</a>
-    <a href="project-avatar.html">AVATAR</a>
-    <a href="project-dads-house.html">DAD'S HOUSE</a>
-    <a href="nda-login.html">PRIVATE VAULT</a>
-</div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+<nav><a href="nda-portfolio.html" class="nav-back">&#8592; Back to Vault</a><div class=\"secure-badge\"><div class=\"secure-dot\"></div> Authorized</div></nav>
 <div class="hero" data-lb data-filename="High Angle Night"><img src="assets/img/projects/Dads House/Color/DH01_BG-SplendouLakeStreetsEXTHighAngleNight_CO_v06 copy.webp" alt="High Angle Night"><div class="hero-title-wrap"><h1 class="hero-title">Dad's House</h1><div class="hero-subtitle">Production Assets &middot; Environment Pipeline</div></div></div>
 <div class="section-intro"><p>Pipeline Stage: Final</p><h2>Background Paint & Color</h2></div>
 <div class="room-color">
@@ -157,10 +100,6 @@
 <div class="section-intro"><p>Pipeline Stage: Layout</p><h2>Background Line Art</h2></div>
 <div class="room-line"><div class="line-container"><div class="grid-blueprint">
     <div class="blueprint-feature"><div><div data-lb data-filename="Living Room Core Set"><img src="assets/img/projects/Dads House/Layout-Line/DH01_BG-IansHouseINTLivingroomTableAlt03Night_LN_v02 copy.webp" alt="Living Room Layout"></div></div><div style="display: flex; flex-direction: column; justify-content: center; gap: 1rem;"><h3 style="font-family: 'EB Garamond', serif; font-size: 2rem; color: #fff; font-weight: 400; line-height: 1;">Living Room Core Set</h3><p style="font-size: 0.8rem; color: var(--muted); line-height: 1.6;">Detailed architectural layout establishing perspective and camera constraints.</p><div class="tech-label" style="border: none; padding: 0;"><span class="shot">Master</span></div></div></div>
-    <div class="blueprint-card"><div data-lb data-filename="BamBam Farm Bush"><img src="assets/img/projects/Dads House/Layout-Line/DH01_BG-BamBamFarmEXTBushRunGrassNight_LN_v02 copy.webp" alt="Line"></div><div class="tech-label"><span class="shot">Master</span></div></div>
-    <div class="blueprint-card"><div data-lb data-filename="BamBam Farm Croc Pen"><img src="assets/img/projects/Dads House/Layout-Line/DH01_BG-BamBamFarmEXTCrocodilePenFlashback_LN_v01 copy.webp" alt="Line"></div><div class="tech-label"><span class="shot">Master</span></div></div>
-    <div class="blueprint-card"><div data-lb data-filename="BamBam Farm Kitchen"><img src="assets/img/projects/Dads House/Layout-Line/DH01_BG-BamBamFarmINTKitchenAlt01Night_LN_v02 copy.webp" alt="Line"></div><div class="tech-label"><span class="shot">Master</span></div></div>
-    <div class="blueprint-card"><div data-lb data-filename="Hardware Store"><img src="assets/img/projects/Dads House/Layout-Line/DH01_BG-BunningsINTChainsawAisleAlt03CI2_LN_v01 copy.webp" alt="Line"></div><div class="tech-label"><span class="shot">Master</span></div></div>
     <div class="blueprint-card"><div data-lb data-filename="Deb's Bedroom Wide"><img src="assets/img/projects/Dads House/Layout-Line/DH01_BG-DebsBedroomINTWideNight_LN_v03 copy.webp" alt="Line"></div><div class="tech-label"><span class="shot">Master</span></div></div>
     <div class="blueprint-card"><div data-lb data-filename="Deb's Bedroom Alt"><img src="assets/img/projects/Dads House/Layout-Line/DH01_BG-DebsBedroomINTAlt01Night_LN_v02 copy.webp" alt="Line"></div><div class="tech-label"><span class="shot">Alt</span></div></div>
     <div class="blueprint-card"><div data-lb data-filename="BamBam Farm Log Night"><img src="assets/img/projects/Dads House/Layout-Line/DH01_BG-BamBamFarmEXTBushRunLogNight_LN_v01 copy.webp" alt="Line"></div><div class="tech-label"><span class="shot">Master</span></div></div>
@@ -182,29 +121,20 @@
 <footer><span>&copy; 2026 Andrés Merino</span><span>Authorized Viewing Only</span></footer>
 <div class="side-contact" id="side-contact"><a href="mailto:andresgonzalezmerino@gmail.com" class="side-btn"><div class="mail-circle"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg></div><span>Get in Touch</span></a></div>
 <div class="lightbox" id="lightbox"><div class="lb-backdrop" id="lb-backdrop"></div><div class="lb-filename" id="lb-filename">FILE_NAME.PNG</div><div class="lb-img-wrap"><img id="lb-img" src="" alt=""></div><div class="lb-controls"><span id="lb-prev">PREV</span><span id="lb-next">NEXT</span><span id="lb-close">CLOSE</span></div></div>
-
-
-
-
-
-
-
-
-
-
-
-
-
 <script>
-(function(){
-    const t = document.getElementById('menu-toggle');
-    const o = document.getElementById('mobile-nav');
-    if(t && o) {
-        t.onclick = function(e) {
-            e.preventDefault();
-            o.classList.toggle('active');
-        };
-    }
-})();</script>
+    const nav = document.getElementById('main-nav');
+    const sideContact = document.getElementById('side-contact');
+    window.addEventListener('scroll', () => { if (window.scrollY > 200) { sideContact.classList.add('visible'); } else { sideContact.classList.remove('visible'); } });
+    const lb = document.getElementById('lightbox'); const lbImg = document.getElementById('lb-img'); const lbFile = document.getElementById('lb-filename'); const triggers = Array.from(document.querySelectorAll('[data-lb]'));
+    const imgList = triggers.map(el => { const img = el.querySelector('img') || el; return { src: img.src, alt: img.alt, file: el.dataset.filename || 'PRODUCTION_ASSET' }; });
+    let current = 0;
+    function openLb(i) { current = i; lbImg.src = imgList[i].src; lbFile.textContent = imgList[i].file; lbImg.style.opacity = '1'; lb.classList.add('active'); document.body.style.overflow = 'hidden'; }
+    function go(dir) { current = (current + dir + imgList.length) % imgList.length; lbImg.style.opacity = '0'; setTimeout(() => { lbImg.src = imgList[current].src; lbFile.textContent = imgList[current].file; lbImg.style.opacity = '1'; }, 200); }
+    triggers.forEach((el, i) => el.addEventListener('click', () => openLb(i)));
+    document.getElementById('lb-close').addEventListener('click', () => { lb.classList.remove('active'); document.body.style.overflow = ''; });
+    document.getElementById('lb-backdrop').addEventListener('click', () => { lb.classList.remove('active'); document.body.style.overflow = ''; });
+    document.getElementById('lb-next').addEventListener('click', e => { e.stopPropagation(); go(1); });
+    document.getElementById('lb-prev').addEventListener('click', e => { e.stopPropagation(); go(-1); });
+</script>
 </body>
 </html>
