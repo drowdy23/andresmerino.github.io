@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Private Work — Andrés Merino</title>
+    <title>Password Protected Work — Andrés Merino</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Space+Mono:wght@400;700&family=EB+Garamond:ital,wght@0,400;1,400&display=swap" rel="stylesheet">
     <style>
@@ -21,8 +21,8 @@
         
         .auth-box { width: 100%; max-width: 480px; position: relative; z-index: 1; }
         
-        .auth-title { font-family: 'EB Garamond', serif; font-size: 3rem; font-weight: 400; color: #fff; margin-bottom: 0.5rem; text-align: center; }
-        .auth-desc { font-family: 'Space Mono', monospace; font-size: 0.55rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--muted); text-align: center; margin-bottom: 4rem; }
+        .auth-title { font-family: 'EB Garamond', serif; font-size: 3rem; font-weight: 400; color: #fff; margin-bottom: 1.5rem; text-align: center; }
+        .auth-desc { font-size: 0.8rem; color: #888; text-align: center; margin-bottom: 3rem; line-height: 1.6; }
         
         .form-group { position: relative; margin-bottom: 2rem; }
         .form-group input { width: 100%; background: transparent; border: none; border-bottom: 1px solid var(--border); color: #fff; font-family: 'Space Mono', monospace; font-size: 1rem; letter-spacing: 0.3em; padding: 1rem 0; text-align: center; transition: border-color 0.4s ease; outline: none; }
@@ -49,15 +49,15 @@
 
 <div class="auth-container">
     <div class="auth-box">
-        <h1 class="auth-title">Private Vault</h1>
-        <p class="auth-desc">Unannounced &middot; Protected Productions</p>
+        <h1 class="auth-title">Password Protected Work</h1>
+        <p class="auth-desc">This section contains unannounced productions and NDA-protected assets. I have explicit authorization to share this material privately with recruiters and art directors for portfolio review purposes only. Do not share or distribute.</p>
         
         <form id="auth-form" onsubmit="checkPassword(event)">
             <div class="form-group">
                 <input type="password" id="pwd" placeholder="Enter Password" autocomplete="off" required>
             </div>
             <button type="submit" class="submit-btn">
-                Access Vault
+                Access Portfolio
                 <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
             </button>
             <div class="error-msg" id="error-msg">Incorrect Password</div>
@@ -72,17 +72,12 @@
 
 <script>
     // Security by obscurity for simple static deployment.
-    // In a real scenario, this would be server-side.
-    const hash = "c5c7094b7c126ecbd584dfc7855018e6"; // Hash for "visdev2026" (example simple verification)
-    
-    // Fallback simple check for demonstration without crypto library
     function checkPassword(e) {
         e.preventDefault();
         const input = document.getElementById('pwd').value;
         const err = document.getElementById('error-msg');
         
-        // Example password: "merino_visdev"
-        if(input === "merino_visdev") {
+        if(input === "Cestvanefy344") {
             sessionStorage.setItem('auth', 'true');
             window.location.href = 'nda-portfolio.html';
         } else {
