@@ -25,12 +25,13 @@
         .tile { position: relative; background: #000; cursor: pointer; overflow: hidden; display: block; border: 1px solid rgba(255,255,255,0.05); box-shadow: 0 10px 40px rgba(0,0,0,0.5); width: 100%; }
         .tile img, .tile video { width: 100%; height: auto; display: block; transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1); }
         .tile:not(.vid):hover img { transform: scale(1.02); }
+        
         .vid-lazy { position: relative; min-height: 200px; background: #0a0a0a; }
         .vid-lazy::before { content: ''; position: absolute; inset: 0; background: linear-gradient(135deg, #0d0d0d 25%, #111 50%, #0d0d0d 75%); background-size: 200% 200%; animation: shimmer 1.5s infinite; }
         @keyframes shimmer { 0%{background-position:200% 0} 100%{background-position:-200% 0} }
         .vid-lazy.loaded::before { display: none; }
-        .vid-lazy video { width: 100%; height: auto; display: block; opacity: 0; transition: opacity 0.6s ease; }
-        .vid-lazy.playing video { opacity: 1; }
+        .vid-lazy video { width: 100%; height: auto; display: block; }
+        
         .tile.vid::after { content: '▶'; position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; font-size: 2.5rem; color: rgba(255,255,255,0); background: rgba(0,0,0,0); transition: all 0.3s ease; pointer-events: none; }
         .tile.vid:hover::after { color: rgba(255,255,255,0.7); background: rgba(0,0,0,0.3); }
         .caption-simple { font-family: 'Space Mono', monospace; font-size: 0.45rem; letter-spacing: 0.25em; text-transform: uppercase; color: var(--muted); margin-top: 1rem; text-align: right; }
@@ -51,7 +52,7 @@
         .mod-center-wings .wing-left { grid-column: 1 / 5; grid-row: 1; z-index: 3; margin-bottom: -5rem; border: 4px solid var(--bg); box-shadow: 0 15px 40px rgba(0,0,0,0.6); }
         .mod-center-wings .center-vid { grid-column: 3 / 11; grid-row: 1; z-index: 1; box-shadow: 0 25px 60px rgba(0,0,0,0.8); }
         .mod-center-wings .wing-right { grid-column: 9 / 13; grid-row: 1; z-index: 2; margin-top: -5rem; border: 4px solid var(--bg); box-shadow: 0 15px 40px rgba(0,0,0,0.6); }
-        
+
         .side-contact { position: fixed; right: 0; top: 50%; transform: translateY(-50%); z-index: 9999; opacity: 0; pointer-events: none; transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1); }
         .side-contact.visible { opacity: 1; pointer-events: all; transform: translateY(-50%) translateX(-1rem); }
         .side-btn { display: flex; flex-direction: column; align-items: center; justify-content: center; background: rgba(12, 12, 12, 0.8); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); color: #fff; padding: 1.5rem 1rem 2.2rem; text-decoration: none; border-radius: 100px; border: 1px solid rgba(255, 255, 255, 0.1); box-shadow: 0 15px 45px rgba(0,0,0,0.6); transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1); }
@@ -85,6 +86,7 @@
 
 <div class="gallery">
 
+    <!-- SHOT 01 — Full master -->
     <div class="mod-full">
         <div class="tile-wrap">
             <div class="tile" data-media="img" data-src="assets/img/projects/Avatar the last airbender/Screenshot 2025-05-23 173329.webp">
@@ -94,6 +96,7 @@
         </div>
     </div>
 
+    <!-- SHOT — Nueva carpeta (6): animated BG with detail inset -->
     <div class="mod-split-asym">
         <div class="mod-inset-left">
             <div class="bg-layer tile vid" data-media="video" data-src="assets/img/projects/Avatar the last airbender/Nueva carpeta (6)/aba04_0050_0110_edt_ani_v009_opt.mp4">
@@ -116,6 +119,7 @@
         </div>
     </div>
 
+    <!-- SHOT — FW: center video with wing masters -->
     <div class="mod-center-wings">
         <div class="wing-left tile-wrap">
             <div class="tile" data-media="img" data-src="assets/img/projects/Avatar the last airbender/FW/Screenshot 2025-05-23 165217.webp">
@@ -138,6 +142,7 @@
         </div>
     </div>
 
+    <!-- SHOT — bt1010 full -->
     <div class="mod-full" style="max-width:1400px;margin:0 auto;">
         <div class="tile-wrap">
             <div class="tile" data-media="img" data-src="assets/img/projects/Avatar the last airbender/bt1010 copy.webp">
@@ -147,6 +152,7 @@
         </div>
     </div>
 
+    <!-- SHOT — Nueva carpeta (2) -->
     <div class="mod-stack" style="max-width:1300px;margin:0 auto;width:100%;">
         <div class="tile-wrap" style="width:90%;">
             <div class="tile vid" data-media="video" data-src="assets/img/projects/Avatar the last airbender/Nueva carpeta (2)/aya40_1300_0570_cmp_del_v009_opt.mp4">
@@ -171,6 +177,7 @@
         </div>
     </div>
 
+    <!-- SHOT — Nueva carpeta (3) -->
     <div class="mod-split-asym" style="align-items:start;">
         <div class="tile-wrap">
             <div class="tile vid" data-media="video" data-src="assets/img/projects/Avatar the last airbender/Nueva carpeta (3)/aya65_1300_0740_cmp_del_v012_opt.mp4">
@@ -196,6 +203,7 @@
         </div>
     </div>
 
+    <!-- SHOT — Nueva carpeta (4) -->
     <div class="mod-stack" style="max-width:1300px;margin:0 auto;width:100%;">
         <div class="tile-wrap" style="width:85%;">
             <div class="tile vid" data-media="video" data-src="assets/img/projects/Avatar the last airbender/Nueva carpeta (4)/bka15_2500_0060_cmp_del_v006_opt.mp4">
@@ -220,6 +228,7 @@
         </div>
     </div>
 
+    <!-- SHOT — Nueva carpeta (5) -->
     <div class="mod-split-asym">
         <div class="tile-wrap">
             <div class="tile" data-media="img" data-src="assets/img/projects/Avatar the last airbender/Nueva carpeta (5)/Screenshot 2025-05-23 175501.webp">
@@ -237,6 +246,7 @@
         </div>
     </div>
 
+    <!-- SHOT — QFQQC -->
     <div class="mod-stack" style="max-width:1200px;margin:0 auto;width:100%;">
         <div class="tile-wrap" style="width:90%;">
             <div class="tile vid" data-media="video" data-src="assets/img/projects/Avatar the last airbender/QFQQC/aba04_0050_0040_cmp_cmp_v006_opt.mp4">
@@ -253,6 +263,7 @@
         </div>
     </div>
 
+    <!-- SHOT — FEWQQ -->
     <div class="mod-stack" style="max-width:1200px;margin:0 auto;width:100%;">
         <div class="tile-wrap" style="width:90%;">
             <div class="tile vid" data-media="video" data-src="assets/img/projects/Avatar the last airbender/FEWQQ/aca05_0125_0030_cmp_pcmp_v007_opt.mp4">
@@ -277,6 +288,7 @@
         </div>
     </div>
 
+    <!-- SHOT — Split warm BGs -->
     <div class="mod-split">
         <div class="tile-wrap">
             <div class="tile" data-media="img" data-src="assets/img/projects/Avatar the last airbender/Screenshot 2025-05-23 174757.webp">
@@ -292,6 +304,7 @@
         </div>
     </div>
 
+    <!-- SHOT — Nueva carpeta (8) -->
     <div class="mod-stack">
         <div class="tile-wrap">
             <div class="tile" data-media="img" data-src="assets/img/projects/Avatar the last airbender/Nueva carpeta (8)/Screenshot 2025-07-28 141729.webp">
@@ -308,6 +321,7 @@
         </div>
     </div>
 
+    <!-- SHOT — WDW -->
     <div class="mod-stack" style="max-width:1300px;margin:0 auto;width:100%;">
         <div class="tile-wrap" style="width:85%;">
             <div class="tile vid" data-media="video" data-src="assets/img/projects/Avatar the last airbender/WDW/aba68_0050_4040_cmp_slp_v001_opt.mp4">
@@ -332,6 +346,7 @@
         </div>
     </div>
 
+    <!-- SHOT — Tree + cool BG -->
     <div class="mod-split" style="max-width:1400px;margin:0 auto;">
         <div class="tile-wrap">
             <div class="tile" data-media="img" data-src="assets/img/projects/Avatar the last airbender/TREE WORK.webp">
@@ -347,6 +362,7 @@
         </div>
     </div>
 
+    <!-- SHOT — NC7 recording -->
     <div class="mod-full" style="max-width:1200px;margin:0 auto;">
         <div class="tile-wrap">
             <div class="tile" data-media="img" data-src="assets/img/projects/Avatar the last airbender/Nueva carpeta (7)/Screenshot 2025-05-23 172542.webp">
@@ -356,6 +372,7 @@
         </div>
     </div>
 
+    <!-- SHOT — General masters spread -->
     <div class="mod-split">
         <div class="tile-wrap">
             <div class="tile" data-media="img" data-src="assets/img/projects/Avatar the last airbender/Screenshot 2025-05-23 165504.webp">
@@ -412,7 +429,6 @@
                 video.play().catch(() => {});
                 wrapper.classList.add('loaded');
             }
-            observer.unobserve(wrapper);
         });
     }, { rootMargin: '200px 0px' });
 
