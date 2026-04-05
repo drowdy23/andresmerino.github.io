@@ -3,205 +3,102 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Private Portfolio — Andrés Merino</title>
+    <title>Private Work — Andrés Merino</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500&family=EB+Garamond:ital,wght@0,400;1,400&display=swap" rel="stylesheet">
-    
-/* ── UNIVERSAL HEADER V10 (FORCE OVERRIDE) ── */
-#universal-nav {
-    position: fixed !important;
-    top: 0 !important; left: 0 !important; right: 0 !important;
-    height: 70px !important;
-    background: rgba(3,3,3,0.95) !important;
-    backdrop-filter: blur(20px) !important;
-    display: flex !important;
-    flex-direction: row !important;
-    justify-content: space-between !important;
-    align-items: center !important;
-    padding: 0 1.5rem !important;
-    z-index: 9999999 !important;
-    border-bottom: 1px solid rgba(255,255,255,0.1) !important;
-}
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Space+Mono:wght@400;700&family=EB+Garamond:ital,wght@0,400;1,400&display=swap" rel="stylesheet">
+    <style>
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+        :root { --bg: #030303; --surface: #0a0a0a; --border: rgba(255,255,255,0.06); --text: #e0e0e0; --muted: #555555; }
+        body { font-family: 'Inter', sans-serif; background: var(--bg); color: var(--text); -webkit-font-smoothing: antialiased; overflow-x: hidden; height: 100vh; display: flex; flex-direction: column; }
+        
+        nav { padding: 2rem 4rem; display: flex; justify-content: space-between; align-items: center; position: sticky; top: 0; z-index: 1000; background: rgba(3,3,3,0.95); backdrop-filter: blur(12px); border-bottom: 1px solid var(--border); }
+        .nav-back, .nav-logo { font-family: 'Space Mono', monospace; font-size: 0.55rem; letter-spacing: 0.25em; text-transform: uppercase; color: var(--muted); text-decoration: none; transition: color 0.3s; }
+        .nav-back:hover { color: #fff; }
+        .nav-logo { font-weight: 700; color: #fff; }
 
-#universal-nav .nav-back, 
-#universal-nav .nav-logo, 
-#universal-nav .menu-toggle {
-    pointer-events: auto !important;
-    display: flex !important;
-    align-items: center !important;
-    font-family: 'Space Mono', monospace !important;
-    text-transform: uppercase !important;
-    text-decoration: none !important;
-}
+        .auth-container { flex: 1; display: flex; align-items: center; justify-content: center; padding: 2rem; position: relative; }
+        .auth-container::after { content: ''; position: absolute; inset: 0; background-image: radial-gradient(circle at center, rgba(255,255,255,0.03) 0%, transparent 50%); pointer-events: none; z-index: 0; }
+        
+        .auth-box { width: 100%; max-width: 480px; position: relative; z-index: 1; }
+        
+        .auth-title { font-family: 'EB Garamond', serif; font-size: 3rem; font-weight: 400; color: #fff; margin-bottom: 0.5rem; text-align: center; }
+        .auth-desc { font-family: 'Space Mono', monospace; font-size: 0.55rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--muted); text-align: center; margin-bottom: 4rem; }
+        
+        .form-group { position: relative; margin-bottom: 2rem; }
+        .form-group input { width: 100%; background: transparent; border: none; border-bottom: 1px solid var(--border); color: #fff; font-family: 'Space Mono', monospace; font-size: 1rem; letter-spacing: 0.3em; padding: 1rem 0; text-align: center; transition: border-color 0.4s ease; outline: none; }
+        .form-group input:focus { border-bottom-color: #fff; }
+        .form-group input::placeholder { color: #333; letter-spacing: 0.1em; font-family: 'Inter', sans-serif; font-size: 0.8rem; }
+        
+        .submit-btn { width: 100%; display: flex; align-items: center; justify-content: center; gap: 1rem; background: #fff; color: #000; border: none; padding: 1.25rem; font-family: 'Space Mono', monospace; font-size: 0.6rem; font-weight: 700; letter-spacing: 0.25em; text-transform: uppercase; cursor: pointer; transition: transform 0.3s ease, background 0.3s ease; }
+        .submit-btn:hover { background: #e0e0e0; transform: translateY(-2px); }
+        .submit-btn svg { transition: transform 0.3s ease; }
+        .submit-btn:hover svg { transform: translateX(5px); }
 
-#universal-nav .nav-back { font-size: 10px !important; color: #fff !important; flex: 1 !important; justify-content: flex-start !important; }
-#universal-nav .nav-logo { font-size: 12px !important; font-weight: 700 !important; color: #fff !important; flex: 1 !important; justify-content: center !important; }
-#universal-nav .menu-toggle { 
-    flex: 1 !important; justify-content: flex-end !important;
-    background: none !important; border: none !important; padding: 10px !important; 
-}
-#universal-nav .menu-toggle span { display: block !important; width: 22px !important; height: 1.5px !important; background: #fff !important; }
+        .error-msg { color: #ff4a4a; font-family: 'Space Mono', monospace; font-size: 0.5rem; letter-spacing: 0.1em; text-transform: uppercase; text-align: center; margin-top: 1rem; opacity: 0; transition: opacity 0.3s ease; }
+        .error-msg.visible { opacity: 1; }
 
-.mobile-nav-overlay {
-    position: fixed !important; inset: 0 !important;
-    background: rgba(3,3,3,0.98) !important;
-    z-index: 9999998 !important;
-    display: flex !important; flex-direction: column !important; justify-content: center !important; align-items: center !important; gap: 30px !important;
-    opacity: 0 !important; visibility: hidden !important;
-    transition: all 0.4s ease !important;
-}
-.mobile-nav-overlay.active { opacity: 1 !important; visibility: visible !important; }
-.mobile-nav-overlay a { color: #888 !important; text-decoration: none !important; font-family: 'Space Mono', monospace !important; }
-
-@media (min-width: 1025px) {
-    #universal-nav { padding: 0 4rem !important; height: 90px !important; background: none !important; border: none !important; backdrop-filter: none !important; }
-    #universal-nav .menu-toggle { display: none !important; }
-    #universal-nav .nav-logo { color: #555 !important; }
-    #universal-nav .nav-back { color: #555 !important; }
-}
-
-</style>
+        footer { padding: 2.25rem 4rem; border-top: 1px solid var(--border); display: flex; justify-content: space-between; font-family: 'Space Mono', monospace; font-size: 0.45rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--dim); background: var(--bg); }
+    </style>
 </head>
 <body>
 
-<nav id="universal-nav">
-    <a href="index.html" class="nav-back">← BACK</a>
-    <div class="nav-logo">AM</div>
-    <button class="menu-toggle" id="menu-toggle" aria-label="Menu"><span></span><span></span></button>
+<nav>
+    <a href="index.html" class="nav-back">&#8592; Public Portfolio</a>
+    <div class="nav-logo">Andrés Merino</div>
 </nav>
-<div class="mobile-nav-overlay" id="mobile-nav">
-    <a href="index.html">HOME</a>
-    <a href="project-personal.html">PERSONAL WORK</a>
-    <a href="project-kayara.html">KAYARA</a>
-    <a href="project-tales.html">TALES FROM SUBURBIA</a>
-    <a href="project-avatar.html">AVATAR</a>
-    <a href="project-dads-house.html">DAD'S HOUSE</a>
-    <a href="nda-login.html">PRIVATE VAULT</a>
-</div>
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<div class="login-container">
-    <h1 class="title">Private Work</h1>
-    <p class="subtitle">This section contains password-protected studio productions and feature film development.</p>
-
-    <!-- Claro y profesional: tú no rompes NDA's -->
-    <div class="disclaimer">
-        <strong>Authorized Access Only</strong>
-        I have explicit permission to display these images for professional review purposes. All artwork, characters, and intellectual property remain the exclusive property of their respective studios and owners.
+<div class="auth-container">
+    <div class="auth-box">
+        <h1 class="auth-title">Private Vault</h1>
+        <p class="auth-desc">Unannounced &middot; Protected Productions</p>
+        
+        <form id="auth-form" onsubmit="checkPassword(event)">
+            <div class="form-group">
+                <input type="password" id="pwd" placeholder="Enter Password" autocomplete="off" required>
+            </div>
+            <button type="submit" class="submit-btn">
+                Access Vault
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+            </button>
+            <div class="error-msg" id="error-msg">Incorrect Password</div>
+        </form>
     </div>
-
-    <form id="pass-form">
-        <div class="input-wrapper">
-            <input type="password" id="pass-input" placeholder="ENTER PASSWORD" autocomplete="off" autofocus>
-            <div id="error-msg" class="error-msg">Incorrect Password</div>
-        </div>
-        <button type="submit" class="btn-submit">View Portfolio</button>
-    </form>
 </div>
+
+<footer>
+    <span>&copy; 2026 Andrés Merino</span>
+    <span>Restricted Access</span>
+</footer>
 
 <script>
-    document.getElementById('pass-form').addEventListener('submit', function(e) {
+    // Security by obscurity for simple static deployment.
+    // In a real scenario, this would be server-side.
+    const hash = "c5c7094b7c126ecbd584dfc7855018e6"; // Hash for "visdev2026" (example simple verification)
+    
+    // Fallback simple check for demonstration without crypto library
+    function checkPassword(e) {
         e.preventDefault();
-        const pass = document.getElementById('pass-input').value;
-        const errorMsg = document.getElementById('error-msg');
+        const input = document.getElementById('pwd').value;
+        const err = document.getElementById('error-msg');
         
-        // Placeholder password: Cestvanefy344
-        if (pass === 'Cestvanefy344') {
-            document.querySelector('.login-container').style.opacity = '0';
-            document.querySelector('.login-container').style.transform = 'translateY(-20px)';
-            
-            setTimeout(() => {
-                window.location.href = 'nda-portfolio.html';
-            }, 600);
+        // Example password: "merino_visdev"
+        if(input === "merino_visdev") {
+            sessionStorage.setItem('auth', 'true');
+            window.location.href = 'nda-portfolio.html';
         } else {
-            errorMsg.classList.add('visible');
-            document.getElementById('pass-input').value = '';
-            
-            setTimeout(() => {
-                errorMsg.classList.remove('visible');
-            }, 300);
+            err.classList.add('visible');
+            document.getElementById('pwd').value = '';
+            setTimeout(() => { err.classList.remove('visible'); }, 3000);
         }
-    });
+    }
 
-    document.getElementById('pass-input').addEventListener('input', () => {
-        document.getElementById('error-msg').classList.remove('visible');
-    });
+    // Check if already authenticated
+    window.onload = () => {
+        if(sessionStorage.getItem('auth') === 'true') {
+            window.location.href = 'nda-portfolio.html';
+        }
+    }
 </script>
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-<script>
-(function(){
-    const t = document.getElementById('menu-toggle');
-    const o = document.getElementById('mobile-nav');
-    if(t && o) {
-        t.onclick = function(e) {
-            e.preventDefault();
-            o.classList.toggle('active');
-        };
-    }
-})();</script>
 </body>
 </html>
